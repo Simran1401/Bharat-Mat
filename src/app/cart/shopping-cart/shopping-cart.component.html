@@ -1,0 +1,220 @@
+<!-- Shippingadress section starts -->
+
+<div class="shipping-section">
+  <div class="container shipping-co">
+    <div class="d-flex mt-3 justify-content-center">
+      <h1 class="new-black-text">{{ paymentPage? 'Payment Method': 'Shipping Address' }}</h1>
+    </div>
+    <div class="row shipping-ro">
+      <div class="col-lg-8">
+        <div class="shipping-form-part">
+          <div class="shippingDetails" [@OrderSummary]="state">
+            <div class="order-btn">
+              <p>ORDER SUMMARY</p>
+              <p (click)="orderSummaryOpen()" style="cursor: pointer; font-size: large;"> <b>({{quantityOfProducts}}
+                  Items)</b>
+                {{ state == 'opened'? '-' : '+' }}
+              </p>
+            </div>
+            <div style="display: flex;" class=" row orders-box">
+              <div class="cardForProduct col-sm-3" *ngFor="let product of Products">
+                <div>
+                  <img src="{{ apiUrl+product.image1 }}" alt="">
+                  <p style="margin-bottom: 0;" class="price">
+                    <b>Price:</b>{{product.price}}<br><b>Quantity:</b>{{product.quantity}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shippingDetails" [@shippingDetails]="stateTwo">
+            <div class="order-btn">
+              <p>
+                SHIPPING DETAILS
+              </p>
+              <p style="cursor: pointer; font-size: large;" (click)="shippingAddressOpen()">
+                {{ stateTwo == 'opened' ? '-' : '+' }}
+              </p>
+            </div>
+
+            <div class="pro-col-3" *ngIf="!formVisible">
+              <div class="row pro-ro-3">
+                <div class="col-lg-6" *ngFor="let addressInf of addressInfo; let i = index">
+                  <div class="pro-col-4" (click)="chooseAddress(addressInf)">
+                    <b>{{ addressInf.name }}</b>
+                    <p>{{ addressInf.address }} {{ addressInf.city }} {{ addressInf.pincode }} {{ addressInf.state }} {{
+                      addressInf.country }}</p>
+                    <p>Mobile: {{ addressInf.mobile_number }}</p>
+                    <span class="text-end">
+                      <i class="fa fa-pencil" aria-hidden="true" (click)="navigateToEdit(addressInf, i)"></i> &nbsp;
+                      <i class="fa fa-trash" aria-hidden="true" (click)="deleteAddress(addressInf, i)"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="pro-col-5" style="background-color: white; cursor: pointer;">
+                    <a (click)="navigateToNew()">
+                      <span class="plus"> + </span>
+                      ADD NEW ADDRESS
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub-div" *ngIf="formVisible">
+              <a class="my-5" href="">Address</a>
+              <form [formGroup]="addressFormOfDelivery">
+                <div class="row mb-3">
+                  <label for="inputName4" class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="name" id="inputName4">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber4" class="col-sm-2 col-form-label">Mobile Number</label>
+                  <div class="col-sm-10">
+                    <input type="tel" class="form-control" formControlName="mobile_number" id="inputNumber4" maxlength="10" minlength="10">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPincode" class="col-sm-2 col-form-label">Pincode</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="pincode" id="inputPincode"
+                      placeholder="600064" maxlength="6" minlength="6">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputAddress2" class="col-sm-2 col-form-label">Address </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="address" id="inputAddress2"
+                      style="margin-bottom: 10px;" placeholder="Lorem Ipsum Doler Amit , 1st Floor , Mandijh fa street">
+                    <div class="row g-3" style=" margin-bottom:10px;">
+                      <div class="col-md-6">
+                        <!-- <input type="text" class="form-control" id="inputCity" formControlName="city"
+                          placeholder="City"> -->
+                          <select formControlName="state" class="w-100 h-100 border" required
+                          #stateValue (change)="selectState(stateValue.value)">
+                        <!-- <option value="" selected disabled>--Select State--</option> -->
+                        <option [ngValue]="null">Select State</option>
+                        <option value="{{states.id}}" *ngFor="let states of stateDetails">{{states.title}}
+
+                        </option>
+                      </select>
+                      </div>
+                      <div class="col-md-6">
+
+                    <select formControlName="city" class="w-100 h-100 border" required>
+                      <!-- <option value="" selected disabled>--Select City--</option> -->
+                      <option [ngValue]="null">Select City</option>
+                      <option value="{{city.id}}" *ngFor="let city of cities"  [style]="city.state.id==stateValue.value?city.title:'display:none'">{{city.title}}</option>
+                    </select>
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <input type="text" class="form-control" id="inputZip" formControlName="country"
+                          placeholder="India" ngModel="India">
+                      </div>
+                    </div>
+                    <div class="row g-3" style="margin-top: 10px;">
+                      <div class="col-md-6">
+                        <button type="submit" class="bhrt-btn" style="width: 100%;" (click)="goToPaymentMethod()">SAVE &
+                          CONTINUE</button>
+                      </div>
+                      <div class="col-md-6">
+                        <button type="submit" class="bhrt-w-btn" style="width: 100%;" (click)="cancellationButton()">CANCEL</button>
+                      </div>
+                    </div>
+                    <p style="color:red; font-size: 20px;">{{ errorAddressForm }}</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="shippingDetails" *ngIf="paymentPage" [@paymentCont]="stateThree">
+            <div class="order-btn">
+              <p>
+                PAYMENT
+              </p>
+            </div>
+            <div class="sub-div">
+              <div class="row paymment-ro">
+                <h6 class="mt-3 mb-3">SELECT PAYMENT METHOD</h6>
+                <div class="col-sm-4">
+                  <!-- <div id="triangle-right"></div> -->
+                  <button (click)="codTrue()" class="{{ selectedCOD? 'credit-card-btn': 'cash-btn' }}"
+                    (click)="openCredit()">Online Payment</button>
+                  <!-- <button (click)="codFalse()" class="{{ isCOD? 'credit-card-btn': 'cash-btn' }}"
+                    (click)="openCash()">Cash on delivery</button> -->
+                  <button class="{{ isPostpaid? 'credit-card-btn': 'cash-btn' }}" (click)="openPostpaid()"
+                    *ngIf="isDealer">Postpaid</button>
+
+                  <!-- <button (click)="codTrue()" class="credit-card-btn"(click)="openCredit()">Online Payment</button>
+                    <button (click)="codTrue()" class="cash-btn" (click)="openCredit()">Cash on delivery </button>
+                    <button (click)="codTrue()" class="cash-btn"(click)="openCredit()"></button> -->
+
+                </div>
+                <div class="col-sm-8">
+                  <div class="cash" *ngIf="cashOnDelivery">
+                    <p>Cash on delivery</p>
+                  </div>
+                  <div class="credit-card" *ngIf="!cashOnDelivery && !isPostpaid" style="display: block;">
+                    <p>Pay Online</p>
+                  </div>
+                  <div class="credit-card" *ngIf="isPostpaid" style="display: flex;">
+                    <p *ngIf="!errorPostpaid">Postpaid</p>
+                    <span *ngIf="errorPostpaid" class="alert alert-danger">{{errorPostpaid}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button *ngIf="paymentPage" class="bhrt-btn mt-3" style="width: 260px; float: right;"
+            (click)="proceedToPay()">Procedd To Pay
+            Amount</button>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-4">
+        <div class="summary-part">
+          <h2>Order Summary</h2>
+          <div class="main-ac">
+            <div class="ac-btn2">
+              <div class="first-os">
+                <p>Cart Value</p>
+                <p class="green-p" *ngIf="discount>0">Discount</p>
+                <p class="green-p" *ngIf="getCoupon">Coupon Discount</p>
+              </div>
+              <div class="second-os">
+                <p>₹{{ subTotal }}</p>
+                <p class="green-p" *ngIf="discount>0">₹ - {{ discount }}</p>
+                <p class="green-p" *ngIf="getCoupon">₹ - {{ subTotal *getCoupon.discount_price/100 }}</p>
+
+              </div>
+            </div>
+            <hr>
+            <div class="third-os">
+              <p>Total Cost</p>
+              <div>
+                <b *ngIf="!getCoupon">₹{{ totalAmount }}</b>
+                <b *ngIf="getCoupon">{{totalAmount - (subTotal *getCoupon.discount_price/100 )| currency :'INR' }}</b>
+                <p>( Inclusive of all taxes )</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Shipping address section ends -->

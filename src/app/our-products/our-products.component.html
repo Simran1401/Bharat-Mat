@@ -1,0 +1,79 @@
+<div class="row justify-content-center mb-5" style="margin: auto;">
+  <div class="col-12">
+    <div class="d-flex justify-content-center my-3">
+      <p class="new-black-text">
+        Our Products
+      </p>
+    </div>
+  </div>
+  <div class="col-3 d-none d-md-block">
+    <app-products-filter></app-products-filter>
+  </div>
+  <div class="col-10 col-md-8 prod-col">
+    <div class="d-block d-md-none">
+      <div class="dropdown">
+        <button class="filterButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          FILTERS &#11167;
+        </button>
+        <ul class="dropdown-menu">
+          <div class="subHeading mb-4">
+            Categories
+          </div>
+          <form *ngFor="let category of categories">
+            <label class="dropdown-item container">
+              <span class="checkmark"></span>
+              <input type="checkbox" (click)="gettingId(category.id)">
+              {{ category.title }}
+            </label>
+          </form>
+          <div class="price-part row justify-content-center mt-5">
+            <div class="col-7">
+              <div class="heading">
+                Price Range
+              </div>
+            </div>
+            <div class="col-5 rangeSelected">&#8377;{{ minValuePr }} - &#8377;{{ maxValuePr }}</div>
+          </div>
+          <div class="col-7 mt-3">
+            <div class="slider">
+              <div class="progress" #progressBarStylePriceRange></div>
+            </div>
+            <div class="range-input">
+              <input type="range" class="range-min" min="100" max="5000" step="1" value="500" #minSlidePr
+                (input)="ChangingWidthOfPriceRange($event)">
+              <input type="range" class="range-max" min="100" max="5000" step="1" value="1500" #maxSlidePr
+                (input)="ChangingWidthOfPriceRange($event)">
+            </div>
+
+          </div>
+          <div class="price-part row justify-content-center mt-5">
+            <div class="col-7">
+              <div class="heading">
+                Price Range
+              </div>
+            </div>
+            <div class="col-5 rangeSelected">{{ minValueDiscount + '%'}} - {{ maxValueDiscount + '%'}}</div>
+          </div>
+          <div class="col-7 mt-3">
+            <div class="slider">
+              <div class="progress" #progressBarStyleDiscount></div>
+            </div>
+            <div class="range-input">
+              <input type="range" class="range-min" max="100" step="1" value="10" #minSlideDiscount
+                (input)="ChangingWidthOfDiscount($event)">
+              <input type="range" class="range-max" max="100" step="1" value="40" #maxSlideDiscount
+                (input)="ChangingWidthOfDiscount($event)">
+            </div>
+          </div>
+          <div class="col-12 mt-4">
+            <button class="bhrt-btn" (click)="applytheFilter()">Apply</button>
+          </div>
+        </ul>
+
+
+
+      </div>
+    </div>
+    <app-product-list></app-product-list>
+  </div>
+</div>

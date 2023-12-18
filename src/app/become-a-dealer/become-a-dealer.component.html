@@ -1,0 +1,336 @@
+<div>
+  <app-log-in-Sign-up (info)="backDropClicked($event)" *ngIf="LogInModalOpen">
+  </app-log-in-Sign-up>
+</div>
+<div class="d-flex mt-3 justify-content-center">
+  <p class="d-inline new-black-text">Become a Dealer</p>
+</div>
+
+
+<!-- <p>{{maskNumber(number1)}}</p> -->
+<form [formGroup]="convertDealerForm" (ngSubmit)="addDealer()" *ngIf="this.isCustomer">
+  <div class="row justify-content-center" style="margin: auto;">
+    <div class="col-10">
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="firmName">Firm Name*</label>
+          <input class="form-control" type="text" formControlName="firm_name">
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="contact_person">Contact Person*</label>
+          <input class="form-control" type="text" formControlName="contact_person">
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label for="fullAddress">Address*</label>
+          <textarea class="form-control" type="text" id="fullAddress" formControlName="address" rows="3"></textarea>
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="mobileNumberTwo">Pincode*</label>
+          <input class="form-control" type="text" formControlName="pin_code">
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label for="fullAddress">State*</label>
+          <select formControlName="state" class="w-100 select-divs border" required #stateValue
+            (change)="selectState(stateValue.value)">
+            <option value="" selected disabled>--Select State--</option>
+            <option value="{{states.id}}" *ngFor="let states of stateDetails">{{states.title}}
+            </option>
+          </select>
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="landLineNumber">City*</label>
+          <select formControlName="city" class="w-100 select-divs border" required>
+            <option value="" selected disabled>--Select City--</option>
+            <option value="{{city.id}}" *ngFor="let city of cities"
+              [style]="city.state.id==stateValue.value?city.title:'display:none'">{{city.title}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row justify-content-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="aadhaarCard">Aadhar Card*
+          </label>
+          <input class="form-control inputFileUpload" id="aadhaarCard" type="file" formControlName="adhar_card_copy"
+            (change)="onSelectAdhar($event)">
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="shopPhoto">Shop Photo*
+          </label>
+          <input class="form-control inputFileUpload" type="file" id="shopPhoto" formControlName="shop_photo"
+            (change)="onSelectShop($event)">
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="panCardCopy">Pan Card*
+          </label>
+          <input id="panCardCopy" class="form-control inputFileUpload" type="file" formControlName="pan_card_copy"
+            (change)="onSelectPan($event)">
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="panCardNumber">Pan Card Number*</label>
+          <input class="form-control" type="text" formControlName="pan_card_no">
+          <span class=" mt-2 text-danger"
+            *ngIf="panCardNumber && panCardNumber.invalid && panCardNumber.touched">Invalid PAN Number</span>
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="landLineNumber">Land Line Number (Optional)</label>
+          <input class="form-control " type="text" formControlName="land_line_number">
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="mobileNumberTwo">Mobile Number 2(Optional)</label>
+          <input class="form-control" type="text" formControlName="mobile_number2">
+        </div>
+      </div>
+
+      <div class="row justify-content-md-evenly mb-0 mb-md-5">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="gstIn">GSTIN (Optional)</label>
+          <input class="form-control" type="text" formControlName="gst_in">
+          <span class=" mt-2 text-danger" *ngIf="gstIn && gstIn.invalid && gstIn.touched">Invalid GST Number</span>
+
+        </div>
+
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="gstInCopy">GSTIN Copy (Optional)</label>
+          <input class="form-control inputFileUpload" style="border: 1px solid #ced4da !important;" type="file"
+            id="gstInCopy" formControlName="gst_in_copy" (change)="onSelectGst($event)">
+        </div>
+
+      </div>
+      <!-- <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="fullAddress">Pincode*</label>
+          <input class="form-control mt-2" type="text" formControlName="pin_code">
+        </div>
+      </div> -->
+
+      <span class="alert alert-danger text-center" *ngIf="error">{{ error }}</span>
+
+      <div class="text-center" style="margin-top: 50px;">
+        <button class="bhrt-btn" *ngIf="!loader">SUBMIT</button>
+        <!-- loader -->
+        <button class="bhrt-btn" type="submit" disabled *ngIf="loader">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+<form [formGroup]="DealerForm" (ngSubmit)="addDealer()" *ngIf="!this.isCustomer">
+  <div class="row justify-content-center" style="margin: auto;">
+    <div class="col-10">
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="firmName">Firm Name*</label>
+          <input class="form-control" type="text" formControlName="firm_name">
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="contact_person">Contact Person*</label>
+          <input class="form-control" type="text" formControlName="contact_person">
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="password">Password*</label>
+          <input class="form-control" type="password" formControlName="password">
+          <span class=" mt-2 text-danger" *ngIf="password && password.invalid && password.touched">Password must be at
+            least 8 characters long</span>
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="email">Email*</label>
+          <input class="form-control" type="email" formControlName="email">
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="mobileNumberOne">Mobile Number*</label>
+          <input class="form-control" type="text" formControlName="mobile_number1" [(ngModel)]="number">
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="mobileNumberTwo">Mobile Number(Optional)</label>
+          <input class="form-control" type="text" formControlName="mobile_number2">
+        </div>
+      </div>
+      <div class="row justify-content-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="aadhaarCard">Aadhar Card*
+          </label>
+          <input class="form-control inputFileUpload" id="aadhaarCard" type="file" formControlName="adhar_card_copy"
+            (change)="onSelectAdhar($event)">
+          <!-- <div class="form-control">
+              <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-upload" viewBox="0 0 16 16">
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                </svg></span>
+            </div> -->
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="shopPhoto">Shop Photo*
+          </label>
+          <input class="form-control inputFileUpload" type="file" id="shopPhoto" formControlName="shop_photo"
+            (change)="onSelectShop($event)">
+          <!-- <div class="form-control">
+              <span class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-upload" viewBox="0 0 16 16">
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                </svg></span>
+            </div> -->
+        </div>
+      </div>
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="panCardCopy">Pan Card*
+          </label>
+          <input id="panCardCopy" class="form-control inputFileUpload" type="file" formControlName="pan_card_copy"
+            (change)="onSelectPan($event)">
+          <!-- <div class="form-control">
+              <span class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-upload" viewBox="0 0 16 16">
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                </svg></span>
+            </div> -->
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="panCardNumber">Pan Card Number*</label>
+          <input class="form-control" type="text" formControlName="pan_card_no">
+          <span class=" mt-2 text-danger"
+            *ngIf="panCardNumber && panCardNumber.invalid && panCardNumber.touched">Invalid PAN Number</span>
+        </div>
+      </div>
+
+
+
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label for="fullAddress">Address*</label>
+          <textarea class="form-control" type="text" id="fullAddress" formControlName="address" rows="3"></textarea>
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="mobileNumberTwo">Pincode*</label>
+          <input class="form-control" type="text" formControlName="pin_code">
+        </div>
+      </div>
+
+      <div class="row justify-content-md-evenly mb-0 mb-md-3">
+
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label for="fullAddress">State*</label>
+          <select formControlName="state" required #stateValue (change)="selectState(stateValue.value)"
+            class="select-tag d-block">
+            <option value="" selected disabled>--Select State--</option>
+            <option value="{{states.id}}" *ngFor="let states of stateDetails">{{states.title}}
+            </option>
+          </select>
+        </div>
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="landLineNumber">City*</label>
+          <select formControlName="city" required class="select-tag d-block">
+            <option value="" selected disabled>--Select City--</option>
+            <option value="{{city.id}}" *ngFor="let city of cities"
+              [style]="city.state.id==stateValue.value?city.title:'display:none'">{{city.title}}</option>
+          </select>
+        </div>
+      </div>
+
+
+
+      <div class="row justify-content-md-evenly mb-0 mb-md-5">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="" for="gstIn">GSTIN (Optional)</label>
+          <input class="form-control" type="text" formControlName="gst_in">
+          <span class=" mt-2 text-danger" *ngIf="gstIn && gstIn.invalid && gstIn.touched">Invalid GST Number</span>
+
+        </div>
+
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
+          <label class="w-100" for="gstInCopy">GSTIN Copy (Optional)</label>
+          <input class="form-control inputFileUpload" style="border: 1px solid #ced4da !important;" type="file"
+            id="gstInCopy" formControlName="gst_in_copy" (change)="onSelectGst($event)">
+          <!-- <div class="form-control">
+              <span class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-upload" viewBox="0 0 16 16">
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                </svg></span>
+            </div> -->
+        </div>
+
+      </div>
+
+      <span class="alert alert-danger text-center" *ngIf="error">{{ error }}</span>
+      <!-- <span class="alert alert-success text-center" *ngIf="succesmessege">{{ succesmessege }}</span> -->
+      <!-- <span class="alert alert-info text-center" *ngIf="errorSignUp">{{errorSignUp}}</span> -->
+      <div class="text-center">
+        <button class="bhrt-btn" *ngIf="!loader">SUBMIT</button>
+        <!-- loader -->
+        <button class="bhrt-btn" type="submit" disabled *ngIf="loader">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<button type="button" class="otpModal" (click)="openModal()" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  style="border: none; text-decoration: none;"></button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="d-flex justify-content-center">
+
+        <h1 class="new-black-text text-center">OTP Verification</h1>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body">
+        <div class="text-p" style="text-align: center;">Enter the code we have sent to your phone number
+          {{maskNumber(number)}}</div>
+        <div class="input-div" id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+          <form [formGroup]="signupVarifyForm" (ngSubmit)="signupVarifyOtp()">
+
+            <input type="number" formControlName="mobile" ngModel="{{number}}" style="display: none;">
+            <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:4}"
+              formControlName="otp"></ng-otp-input>
+
+            <div class="mt-3" *ngIf="errorOtp">
+              <p class="alert alert-danger p-1 mb-0 text-center">{{errorOtp}}</p>
+            </div>
+            <div class="d-flex" style="justify-content: center;">
+              <button type="submit" class="bhrt-btn mt-3 mb-3">VERIFY</button>
+            </div>
+          </form>
+        </div>
+        <div class="mb-3" *ngIf="resendOtpMsg">
+          <p class="alert alert-success p-1 mb-0 text-center">{{resendOtpMsg}}</p>
+        </div>
+        <!-- <p class="text-center">Didn’t receive yet ? <b style="cursor: pointer;" (click)="resendOTP()"> RESEND OTP</b>
+        </p> -->
+      </div>
+    </div>
+  </div>
+</div>

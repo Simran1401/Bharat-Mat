@@ -1,0 +1,20 @@
+<div data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+  <div class="container" style="background-color: #f7f7f7;">
+    <div class="row" style="padding-top:80px;padding-bottom:100px;">
+      <div class="d-flex mt-3 justify-content-center">
+        <h1 class="new-black-text " style="text-align:center;" *ngIf="content?.title">{{ content?.title }}</h1>
+      </div>
+      <!-- <nav class="col-sm-3" id="myScrollspy" style="margin-top:20px; background-color: #f7f7f7;" *ngIf="content">
+        <ul class="nav nav-pills nav-stacked spy-nav" style="top:10%;">
+          <li class="active" *ngFor="let value of list, let i = index" (click)="scrollTo(value.id)"><a
+              [innerHtml]="value.value"></a></li>
+        </ul>
+      </nav> -->
+      <div class="col-sm-11" style="margin: auto;">
+        <div *ngFor="let value of filtered_content, let i = index">
+          <div [innerHtml]="value?.value"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

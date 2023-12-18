@@ -1,0 +1,134 @@
+<div class="inner-height">
+
+    <div class="container">
+        <div>
+            <h4>CREATE RETURN</h4>
+        </div>
+        <table class="table table-hover" *ngIf="product.order_status == 'Delivered'">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Unit costs</th>
+                <th>Order quantity</th>
+                <th>Return quantity</th>
+                <th>Amount</th>
+                <th>Order Return Reason</th>
+            </tr>
+            <tr *ngFor="let product of product.carts;let i =index">
+                <td>
+                    <img src="{{ apiUrl+product.image1}}" alt="" style="height: 100px; width: 100px;">
+                </td>
+                <td>{{product.name}}</td>
+                <td>{{product.total_amout/product.qty}}</td>
+                <td>{{product.qty}}</td>
+                <td>
+
+                    <select name="" id="" #selectList (change)="update_return_detail(product,selectList.value)" required (click)="selectQty()">
+                        <option *ngFor="let value of count(product?.qty + 1);let si=index;">{{ si }}
+                        </option>
+                    </select>
+
+                </td>
+
+                <td>
+                    <!-- {{quantity_list[product?.id]}} -->
+                    {{ quantity_list[product?.id]?.quantity?(product?.total_amout *
+                    quantity_list[product?.id]?.quantity)?.toFixed(2):0 }}
+                </td>
+                <td>
+                    <select class="form-select" aria-label="Default select example" (click)="selectReason()"
+                        #reasonValue (change)="select_reason(product?.id,reasonValue.value)" required>
+                        <option disabled selected value=" ">Select a Reason</option>
+                        <option value="{{reason.id}}" *ngFor="let reason of reason">
+                            {{reason.content}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <span *ngIf="errormsg" class="alert alert-danger mt-3 d-block">{{errormsg}}</span>
+                </td>
+                
+            </tr>
+        </table>
+        <table class="table table-hover" *ngIf="product.order_status == 'New'">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Unit costs</th>
+                <th>Order quantity</th>
+                <th>Amount</th>
+            </tr>
+            <tr *ngFor="let product of product.carts;let i =index">
+                <td>
+                    <img src="{{ apiUrl+product.image1}}" alt="" style="height: 100px; width: 100px;">
+                </td>
+                <td>{{product.name}}</td>
+                <td>{{product.total_amout/product.qty}}</td>
+                <td>{{product.qty}}</td>
+                <td>{{product.total_amout}} </td>
+            </tr>
+        </table>
+
+        <div class="container">
+            <select class="form-select" aria-label="Default select example" (click)="selectCancel()" #cancelValue
+                (change)="select_cancel(cancelValue.value)" required>
+                <option disabled selected value=" ">Select a Reason</option>
+                <option value="{{reason.id}}" *ngFor="let reason of cancel">
+                    {{reason.content}}</option>
+            </select>
+            <span *ngIf="errormsg" class="alert alert-danger mt-3 d-block">{{errormsg}}</span>
+          
+        </div>
+       
+        <!-- order summary -->
+        <div class="container mb-4 mt-4">
+            <div class="row w-100 ">
+                <div class="col-sm bg-white border rounded">
+                    <h3 class="orderHeading">Details</h3>
+                    <div class="orderDetails">
+                        <ul>
+                            <li>Order ID: <span>{{product.id}}</span></li>
+                            <li>Placed on: <span>{{product.deliver_date |date}}</span></li>
+                            <li>Payment mode: <span>{{product.payment_type}}</span></li>
+                            <li>Total Items: <span>{{totalQty}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm border rounded">
+                    <h3 class="orderHeading">Order Summary</h3>
+                    <div class="orderDetails">
+                        <ul>
+                            <li>SubTotal: <span>₹{{product.subtotal}}</span></li>
+                            <li *ngIf="product.discount<=0">Discount:<span>₹0</span></li>
+                            <li *ngIf="product.discount>0">Discount:<span>₹{{product.discount}}</span></li>
+                            <li>Delivery Charges: <span>{{product.delivery_charges}}</span></li>
+                            <li>Total Amount: <span>₹{{product.total}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm border rounded">
+                    <h3 class="orderHeading">Billing Address</h3>
+                    <div class="orderDetails">
+                        <ul>
+                            <li>{{product.checkout.name}}</li>
+                            <li>{{product.checkout.address}},{{product.checkout.city}}</li>
+                            <li>{{product.checkout.state}},{{product.checkout.pincode}}</li>
+                            <li>{{product.checkout.mobile_number}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="selectReasn && selectqty && product.order_status=='Delivered'">
+            <button class="btn btn-sm order-cancel-button" (click)="returnOrder()">Return Order</button>
+        </div>
+
+        <div *ngIf="product.order_status =='New'">
+            <button class="order-cancel-button" (click)="returnOrder()">Cancel Order</button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,102 @@
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0em;
+  color: rgb(0, 0, 0);
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: 600;
+}
+.productPrice {
+  font-size: 23px;
+  font-weight: 400;
+  text-align: right !important;
+  padding: 0;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #c30000;
+}
+
+.prod-list {
+  padding: 0;
+}
+.fullPrice {
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+.fixedPrice {
+  font-size: 12px;
+  font-weight: 400;
+}
+.discount {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+}
+.productDesc {
+  font-size: 12px;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.productBox{
+  height: 350px;
+  width: 90%;
+  margin: auto;
+}
+
+.productBox img{
+  height: 200px;
+}
+
+@media (max-width:1024px) {
+  .productBox{
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 990px) {
+
+  .productBox{
+    height: 260px;
+    width: 100%;
+  }
+
+  .productBox img{
+    height: 125px;
+  }
+
+  .productPrice {
+    width: 100%;
+    text-align: center !important;
+  }
+  .prod-list {
+    width: 100%;
+    text-align: center !important;
+    justify-content: center;
+  }
+}
+
+@media (max-width:765px) {
+  .productBox{
+    height: 125px;
+  }
+
+  .productBox img{
+    height: 125px;
+  }
+
+  .productPrice{
+    font-size: 19px;
+  }
+
+  .prod-text{
+    padding: 10px 0 10px 0;
+  }
+}

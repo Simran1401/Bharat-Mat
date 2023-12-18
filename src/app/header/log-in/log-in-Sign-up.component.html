@@ -1,0 +1,297 @@
+<div class="backdrop" style="width: 100%;" (click)="onClose()"></div>
+
+<div>
+  <div class="outlineBorder" #Box [@loginModal]>
+    <div class="row">
+      <div class="col-12">
+        <img src="../../../assets/images/header_images/logo.png" class="modal-logo" alt="">
+        <h5 class="log-header text-center" *ngIf="SignUpMode ">Register Now</h5>
+        <!-- <h5 class="log-header text-center" *ngIf="!OTPMode">{{ LogInMode ? 'Login Now': 'Register Now' }}</h5> -->
+        <h5 class="log-header text-center" *ngIf="LogInMode">Login Now</h5>
+        <h5 class="log-header text-center" *ngIf="OTPMode">Login With OTP</h5>
+        <h5 class="log-header text-center" *ngIf="passwordSet || confirmPasswordSet"> Set New Password</h5>
+      </div>
+    </div>
+    <form [formGroup]="SignInForm" class="log-body" *ngIf="LogInMode" (ngSubmit)="loginForm()">
+      <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+      transform: translate(-170%,45%);
+      top: 0;"></button>
+      <p>{{maskNumber(number1)}}</p>
+      <div class="mb-3">
+        <input type="text" class="form-control form_input" formControlName="username" placeholder="Phone number"
+          maxlength="10" minlength="10">
+        <span class=" mt-2 text-danger"
+          *ngIf="emailPhoneNumber && emailPhoneNumber.invalid && emailPhoneNumber.touched">Enter your 10 digits mobile
+          phone number</span>
+      </div>
+      <div class="mb-3">
+        <div class="d-flex" style="position: relative;">
+          <input [type]="show ? 'text' : 'password'" class="form-control form_input" formControlName="password"
+            placeholder="Password" id="id_password">
+          <!-- <button (click)="passwor()" class="eye-btn">
+          {{show ? 'show' : 'Hide'}}</button> -->
+
+          <div (click)="passwor()" class="eye-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill"
+              viewBox="0 0 16 16" *ngIf="show">
+              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-eye-slash-fill" viewBox="0 0 16 16" *ngIf="!show">
+              <path
+                d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+              <path
+                d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+            </svg>
+
+          </div>
+        </div>
+        <span class=" mt-2 text-danger"
+          *ngIf="signInPassword && signInPassword.invalid && signInPassword.touched">Password must be at least 8
+          characters long</span>
+      </div>
+
+      <a style="text-decoration: none;color:#000; font-size:14px; cursor: pointer;" (click)="openForgot()">Forgot
+        Password?</a>
+      <div class="mb-3" *ngIf="errorSignIn">
+        <p class="alert alert-danger p-1 text-start">{{errorSignIn}}</p>
+      </div>
+      <div class="mb-3" *ngIf="errroLoginMsg">
+        <p class="alert alert-danger p-1 text-start">{{errroLoginMsg}}</p>
+      </div>
+      <div class="alert alert-success fs-6" style="padding: 5px 0px;" *ngIf="userSignedUp">Registeration successfull
+        enter the details to LogIn.</div>
+      <div class="mb-3 sign-part">
+        <button class="sign-btn login-btn-color" type="submit">Sign In</button>
+        <p>Or</p>
+        <a (click)="OpenOtpModal()" style="cursor: pointer;">Login with OTP</a>
+      </div>
+    </form>
+
+    <form [formGroup]="registerationForm" class="log-body" *ngIf="SignUpMode">
+      <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+      transform: translate(-170%,45%);
+      top: 0;"></button>
+      <div class="mb-3">
+        <input type="text" class="form-control form_input" formControlName="name" placeholder="Name*">
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control form_input" formControlName="phone" placeholder="Phone Number*"
+          maxlength="10" minlength="10">
+        <span class=" mt-2 text-danger" *ngIf="phone && phone.invalid && phone.touched">Enter your 10 digits mobile
+          phone number</span>
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control form_input" formControlName="email" placeholder="Email">
+      </div>
+      <div class="mb-3">
+        <div class="d-flex" style="position: relative;">
+          <input [type]="show1 ? 'text' : 'password'" class="form-control form_input" formControlName="password"
+            placeholder="Password*">
+
+          <div (click)="passwor1()" class="eye-btn1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill"
+              viewBox="0 0 16 16" *ngIf="show1">
+              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-eye-slash-fill" viewBox="0 0 16 16" *ngIf="!show1">
+              <path
+                d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+              <path
+                d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+            </svg>
+
+          </div>
+        </div>
+        <span class=" mt-2 text-danger" *ngIf="password && password.invalid && password.touched">Password must be at
+          least 8 characters long</span>
+
+      </div>
+      <div class="mb-3" *ngIf="errorSignUp">
+        <p class="alert alert-danger p-1 text-start">{{errorSignUp}}</p>
+      </div>
+      <div class="mb-3" *ngIf="erroRegisterMsg">
+        <p class="alert alert-danger p-1 text-start">{{erroRegisterMsg}}</p>
+      </div>
+      <div class="mb-3 sign-part">
+        <button class="sign-btn login-btn-color" (click)="registerNow()">Register Now</button>
+        <p>Or</p>
+        <a (click)="OpenOtpModal()" style="cursor: pointer;" class="">Login with OTP</a>
+      </div>
+    </form>
+
+
+    <div class="log-body" *ngIf="OTPMode">
+      <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+      transform: translate(-170%,45%);
+      top: 0;"></button>
+      <form [formGroup]="logInWithOtpForm" (ngSubmit)="logInOtp()">
+        <div class="mb-3">
+          <input type="text" formControlName="mobile" class="form-control form_input" placeholder="Phone number"
+            [(ngModel)]="num" maxlength="10" minlength="10">
+          <span class=" mt-2 text-danger" *ngIf="mobile && mobile.invalid && mobile.touched">Enter your 10 digits mobile
+            phone number</span>
+
+        </div>
+        <div class="mb-3" *ngIf="errorInOtp">
+          <p class="alert alert-danger p-1 mb-0 text-start">{{errorInOtp}}</p>
+        </div>
+        <div class="mb-3 sign-part">
+
+          <button class="sign-btn login-btn-color">Login with otp</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="otp-container" *ngIf="varifyOtp">
+      <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+      transform: translate(-170%,45%);
+      top: 0;"></button>
+
+
+      <h5 class="log-header text-center">OTP Verification</h5>
+      <div class="text-p">Enter the code we have sent to your phone number {{maskNumber(number)}}</div>
+      <div class="input-div" id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+        <form [formGroup]="loginOtpVerifyForm" (ngSubmit)="otpVerify()">
+          <input type="number" formControlName="mobile" ngModel="{{number?number:num}}" style="display: none;">
+          <ng-otp-input (onInputChange)="onOtpChange1($event)" [config]="{length:4}"></ng-otp-input>
+          <span class=" mt-5 text-danger" *ngIf="otp && otp.invalid && otp.touched"> Enter otp</span>
+          <div class="mt-3" *ngIf="errorVerify">
+            <p class="alert alert-danger p-1 mb-0 text-start">{{errorVerify}}</p>
+          </div>
+          <button class="sign-btn login-btn-color mt-3 mb-3" type="submit">VERIFY</button>
+        </form>
+      </div>
+
+      <!-- <div class="mb-3" *ngIf="resendOtpMsg">
+        <p class="alert alert-success p-1 mb-0 text-center">{{resendOtpMsg}}</p>
+      </div> -->
+      <p>Didn’t receive yet ? <a (click)="resendOTP()" style="cursor: pointer;"> RESEND OTP</a> </p>
+    </div>
+
+    <!-- signup varification -->
+    <div class="otp-container" *ngIf="varifyOtpSignup">
+      <h5 class="log-header text-center">OTP Verification</h5>
+
+      <div class="text-p">Enter the code we have sent to your phone number {{maskNumber(number)}}</div>
+      <div class="input-div" id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+        <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+        transform: translate(-170%,45%);
+        top: 0;"></button>
+
+        <form [formGroup]="signupVarifyForm" (ngSubmit)="signupVarifyOtp()">
+          <input type="number" formControlName="mobile" ngModel="{{number}}" style="display: none;">
+
+          <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:4}"
+            formControlName="otp"></ng-otp-input>
+          <span class=" mt-5 text-danger" *ngIf="otp1 && otp1.invalid && otp1.touched">Enter otp</span>
+
+          <div class="mt-3" *ngIf="errorOtp">
+            <p class="alert alert-danger p-1 mb-0 text-start">{{errorOtp}}</p>
+          </div>
+          <button type="submit" class="sign-btn login-btn-color mt-3 mb-3">VERIFY</button>
+        </form>
+      </div>
+      <!-- <div class="mb-3" *ngIf="resendOtpMsg">
+        <p class="alert alert-success p-1 mb-0 text-center">{{resendOtpMsg}}</p>
+      </div> -->
+      <p>Didn’t receive yet ? <a (click)="resendOTP()" style="cursor: pointer;"> RESEND OTP</a> </p>
+    </div>
+
+    <!-- forgot password -->
+    <div class="log-body" *ngIf="passwordSet">
+      <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+  transform: translate(-170%,45%);
+  top: 0;"></button>
+      <form [formGroup]="forgotPasswordForm" (ngSubmit)="forgot()">
+        <div class="mb-3">
+
+          <input type="text" formControlName="mobile" class="form-control form_input" placeholder="Phone number"
+            maxlength="10" minlength="10">
+          <span class=" mt-2 text-danger" *ngIf="mobile1 && mobile1.invalid && mobile1.touched">Enter your 10 digits
+            mobile phone number</span>
+
+        </div>
+        <div class="mb-3" *ngIf="ErrorStatusMsg">
+          <p class="alert alert-danger p-1 mb-0 text-start">{{ErrorStatusMsg}}</p>
+        </div>
+        <div class="mb-3 sign-part">
+
+          <button class="sign-btn login-btn-color">Send otp</button>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- setPassword -->
+    <div class="log-body" *ngIf="confirmPasswordSet">
+      <div class="text-p">Enter the code we have sent to your phone number {{maskNumber(number)}}</div>
+      <button type="button" class="btn-close position-absolute" aria-label="Close" (click)="onClose()" style="    left: 100%;
+  transform: translate(-170%,45%);
+  top: 0;"></button>
+
+      <form [formGroup]="setPasswordForm" (ngSubmit)="setResetPassword()" class="mt-3">
+        <div class="mb-3">
+
+          <input type="number" formControlName="mobile" ngModel="{{number}}" style="display: none;">
+
+          <ng-otp-input (onInputChange)="onOtpSetPassword($event)" [config]="{length:4}"
+            formControlName="otp"></ng-otp-input>
+          <span class=" mt-2 text-danger" *ngIf="otp2 && otp2.invalid && otp2.touched">Enter otp</span>
+          <div class="d-flex" style="position: relative;">
+            <input [type]="show2 ? 'text' : 'password'" formControlName="new_password"
+              class="form-control form_input mt-3" placeholder="New_password">
+            <div (click)="passwor2()" class="eye-btn2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill"
+                viewBox="0 0 16 16" *ngIf="show2">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-eye-slash-fill" viewBox="0 0 16 16" *ngIf="!show2">
+                <path
+                  d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+                <path
+                  d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+              </svg>
+
+            </div>
+          </div>
+
+
+          <span class=" mt-2 text-danger" *ngIf="new_password && new_password.invalid && new_password.touched">Password
+            must be at least 8
+            characters long</span>
+        </div>
+
+        <div class="mb-3" *ngIf="resetPasswordErrorMsg">
+          <p class="alert alert-danger p-1 mb-0 text-start">{{ resetPasswordErrorMsg}}</p>
+        </div>
+        <!-- <div class="mb-3" *ngIf="successMsg">
+      <p class="alert alert-danger p-1 mb-0 text-start">{{successMsg}}</p>
+    </div> -->
+        <div class="mb-3 sign-part">
+
+          <button class="sign-btn login-btn-color">Change Password</button>
+        </div>
+      </form>
+      <p>Didn’t receive yet ? <a (click)="resendOTP()" style="cursor: pointer;"> RESEND OTP</a> </p>
+    </div>
+
+
+
+    <div class="log-footer" *ngIf="LogInMode || varifyOtpSignup">
+      <span>Don't have an account yet? <a (click)="openLogin()" style="cursor: pointer;">Register Now</a></span>
+    </div>
+    <div class="log-footer" *ngIf="passwordSet || confirmPasswordSet">
+      <span>Don't have an account yet? <a (click)="openLogin()" style="cursor: pointer;">Register Now</a></span>
+    </div>
+    <div class="log-footer" *ngIf="SignUpMode || varifyOtp ">
+      <span>Don't have an account yet? <a (click)="openSignup()" style="cursor: pointer;">Login Now</a></span>
+    </div>
+
+  </div>
+</div>

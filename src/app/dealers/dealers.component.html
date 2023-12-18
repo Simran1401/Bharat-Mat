@@ -1,0 +1,142 @@
+<div class="dealers">
+    <div class="container">
+        <div class="row dealers-ro mb-5">
+            <div class="col-sm-12">
+                <form [formGroup]="form" action="" class="select-tags">
+                    <div class="select-div">
+                        <select formControlName="state" required #stateValue (change)="selectState(stateValue.value)">
+                            <option selected disabled value="">STATE</option>
+                            <option value="{{states.title}}" *ngFor="let states of stateDetails">{{states.title}}
+                            </option>
+                        </select>
+                        <select formControlName="city" required>
+                            <option selected disabled value="">CITY</option>
+                            <option value="{{city.title}}" *ngFor="let city of cities"
+                                [style]="city.state.title==stateValue.value?city.title:'display:none'">{{city.title}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="btn-div">
+                        <button class="bhrt-btn" (click)="filter()">SEARCH</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        <div class="row dealers-ro-2">
+            <div class="d-flex">
+                <h1 class="new-black-text mb-4">Our Network</h1>
+            </div>
+        </div>
+        <div class="row dealers-ro-3 mt-3 mb-3" *ngIf="stat && !display ">
+            <p class="text-p" style="position: absolute;top:10%;margin-left: 25px; z-index: -2;width: 80%; ">NO DATA FOUND</p>
+            <div class="col-sm-4" *ngFor="let netw of network" [style]="this.state==netw.city.state.title?'':'display:none'">
+                <div class="dealers-main-box mb-3">
+                    <div class="dealers-box">
+                        <div class="first-div">
+                            <div class="d-flex align-items-center" style="margin-bottom: 2px;">
+                                <img src="../../assets/images/header_images/logo.png" class="dealer-logo" alt="">
+                                <p class="text-p mb-0">{{netw.user.name}} </p>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                </svg>
+                                <p class="text-p address">
+                                    {{netw.address + ' ' + netw.city.title + ' ' + netw.city.state.title +' '+
+                                    netw.pin_code }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg>
+                            <p class="text-p mb-0">{{netw.user.phone}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row dealers-ro-3 mt-3 mb-3" *ngIf="cite && !display ">
+            <p class="text-p" style="position: absolute;top:10%;margin-left: 25px; z-index: -2;width: 80%;">NO DATA FOUND</p>
+
+            <div class="col-sm-4" *ngFor="let netw of network"
+                [style]="this.state==netw.city.state.title && this.city==netw.city.title?'':'display:none'">
+                <div class="dealers-main-box mb-3">
+                    <div class="dealers-box">
+                        <div class="first-div">
+                            <div class="d-flex align-items-center" style="margin-bottom: 2px;">
+                                <img src="../../assets/images/header_images/logo.png" class="dealer-logo" alt="">
+                                <p class="text-p mb-0">{{netw.user.name}} </p>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                </svg>
+                                <p class="text-p address">
+                                    {{netw.address + ' ' + netw.city.title + ' ' + netw.city.state.title +' '+
+                                    netw.pin_code }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg>
+                            <p class="text-p mb-0">{{netw.user.phone}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row dealers-ro-3 mt-3 mb-3" *ngIf="display">
+            <p class="text-p" style="position: absolute; top:10%;margin-left: 25px; z-index: -2;width: 80%;">NO DATA FOUND</p>
+
+            <div class="col-sm-4" *ngFor="let netw of network">
+                <div class="dealers-main-box mb-3">
+                    <div class="dealers-box">
+                        <div class="first-div">
+                            <div class="d-flex align-items-center" style="margin-bottom: 2px;">
+                                <img src="../../assets/images/header_images/logo.png" class="dealer-logo" alt="">
+                                <p class="text-p mb-0">{{netw.user.name}} </p>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                </svg>
+                                <p class="text-p address">
+                                    {{netw.address + ' ' + netw.city.title + ' ' + netw.city.state.title +' '+
+                                    netw.pin_code }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-baseline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg>
+                            <p class="text-p mb-0">{{netw.user.phone}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="error-txt" *ngFor=" let netw of network ; let i= index  ">
+            <p class="text-p"  *ngIf="this.city!=netw.city.title " [style]="i==0?'display:block': 'display:none'">NO DATA FOUND</p>
+        </div> -->
+
+    </div>
+</div>

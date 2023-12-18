@@ -1,0 +1,20 @@
+<div class="testimonial-section">
+  <div class="container test-co">
+    <div class="d-flex mt-3 justify-content-center">
+      <h1 class="mb-5 new-black-text">What Our Customers Say</h1>
+    </div>
+    <div class="row test-ro">
+      <div class="col-lg-4 content" *ngFor="let review of reviews">
+        <div class="testimonial-box">
+          <div class="blue-box">
+            <img src="{{ apiUrl+review.image }}" class="img-1" alt="">
+          </div>
+          <p class="p_1">{{ review.description }}</p>
+          <img src="../../assets/images/testimonial-images/Ellipse_57.png" alt="" class="customer-img">
+          <h5 class="blue-text">{{ review.name }}</h5>
+          <!-- <p>Designation</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

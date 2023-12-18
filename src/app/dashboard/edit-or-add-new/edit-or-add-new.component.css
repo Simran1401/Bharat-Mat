@@ -1,0 +1,120 @@
+.profile-section {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.text-h1 {
+    font-family: "Frank Ruhl Libre", serif;
+    font-weight: 700;
+    font-size: 54px;
+    margin-bottom: 30px;
+    color: #34251F;
+    text-align: center;
+    display: inline;
+}
+
+@media (max-width: 760px) {
+    .text-h1 {
+        font-size: 40px;
+    }
+}
+
+
+
+#right {
+    float: right;
+}
+
+.pro-col-1 {
+    text-align: center;
+}
+
+.grey-btn {
+    background: #DBDBDB;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border: none;
+    width: 80%;
+    height: 48px;
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.grey-btn:hover {
+    box-shadow: none;
+    transition: 0.3s;
+}
+
+.white-btn {
+    background: #fff;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border: none;
+    width: 80%;
+    height: 48px;
+    font-size: 18px;
+    margin: 3px 0;
+}
+
+.white-btn:hover {
+    box-shadow: none;
+    transition: 0.3s;
+}
+
+.pro-col-2 ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pro-ro-3 {
+    background: #F7F7F7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 50px;
+}
+
+.col-form-label{
+    font-size: 15px;
+}
+
+.form-control{
+    background: #FFFFFF;
+    border: 0.5px solid #7C7C7C;
+    border-radius: 5px;
+    height: 34px;
+}
+
+#exampleFormControlTextarea1{
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.form-select{
+    height: 34px;
+}
+
+.pro-ro-2 {
+    margin: 50px 0;
+}
+
+@media (max-width:990px) {
+    .pro-col-2 {
+        display: none;
+    }
+
+    .pro-ro-3 {
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        padding: 10px;
+    }
+
+    .form-control{
+        height: 27px;
+    }
+
+    .pro-col-4 {
+        margin-bottom: 30px;
+    }
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+ border: 1px solid red;
+}

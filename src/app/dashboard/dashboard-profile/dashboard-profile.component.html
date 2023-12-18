@@ -1,0 +1,62 @@
+<div class="row pro-ro-1">
+  <div class="col-lg-12 pro-col-1">
+    <div class="d-flex mt-3 justify-content-center">
+      <h1 class="new-black-text">Profile</h1>
+    </div>
+    <button class="bhrt-btn width" id="right" (click)="openModal()" data-bs-toggle="modal"
+      data-bs-target="#exampleModal">EDIT</button>
+  </div>
+</div>
+<div class="pro-col-3">
+  <div class="row pro-ro-3">
+    <div class="col-lg-12 pro-col-4" *ngIf="userProfileData">
+      <span><b>Name : </b>{{ userProfileData.name }}</span>
+      <span><b>Email Id : </b>{{ userProfileData.email }}</span>
+      <span><b>Phone Number : </b>{{ userProfileData.phone }}</span>
+      <div style="    display: flex;
+          justify-content: center;
+          margin: 20px 0;">
+        <button class="bhrt-btn width" id="hidden" (click)="openModal()" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">EDIT</button>
+      </div>
+    </div>
+  </div>
+  <h1 class="question">
+    Do you want to become a dealer? 
+    <a href="/become-a-dealer">Register Now</a>
+  </h1>
+</div>
+
+
+
+<!-- edit profile -->
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content editProf">
+      <div class="d-flex mt-3 justify-content-center">
+        <h1 class="new-black-text text-center">Update Profile</h1>
+      </div>
+      <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body">
+
+        <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()">
+          <input type="text" formControlName="name" class="form-input" placeholder="Name"
+            ngModel="{{ userProfileData.name }}">
+          <input type="email" formControlName="email" class="form-input" placeholder="Email"
+            ngModel="{{ userProfileData.email }}">
+          <!-- <input type="number" formControlName="phone" class="form-input" placeholder="Phone No" ngModel="{{ userProfileData.phone }}"> -->
+          <div class="d-flex" style="justify-content: center;">
+            <button class="bhrt-btn width">Update Profile</button>
+          </div>
+        </form>
+        <br>
+        <!-- <div class="mb-3" *ngIf="statusMsg">
+          <p class="alert alert-success p-1 mb-0 text-center">{{statusMsg}}</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

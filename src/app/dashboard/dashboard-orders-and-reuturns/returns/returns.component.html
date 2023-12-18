@@ -1,0 +1,46 @@
+<div class="pro-col-3">
+  <div class="order-table"  *ngFor="let product of return">
+    <div class="row pro-ro-4">
+      <div class="col-lg-6">
+        <div class="order-box">
+          <div class="first-div">
+            <span>
+              <b>Order Id. {{ product.id }}</b>
+            </span>
+          </div>
+          <div class="second-div">
+            <b>Return Date</b>
+            <p>{{ product.date_time | date: "MMMM d, y"}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6" >
+        <!-- <div class="address-box">
+          <b>Address
+            <p style="font-weight: 400;">{{ product.checkout.address + ' ' + product.checkout.city + ' ' +
+              product.checkout.state + '-' + product.checkout.pincode + ' ' + product.checkout.country }}</p>
+          </b>
+        </div> -->
+      </div>
+    </div>
+    <div class="row pro-ro-5">
+      <div class="col-lg-4">
+        <div class="img-box">
+          <img src="{{apiUrl+product.image1}}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="table-content-box">
+          <b style="display: block;     margin-bottom: -5px;">{{product.name}}</b>
+          <span style="font-size: 14px;word-break: break-all;" [innerHTML]="product.description | slice:0: 250 "> </span>
+          <div>
+            <b>{{product.total_amount | currency:'INR'}}</b>
+            <p class="small-p">{{product.total_discount | currency:'INR'}}</p>
+          </div>
+          <p style="    font-size: 19px;
+                  margin-bottom: 0;">{{product.qty}}Pcs</p>
+          <p class="green-p">Order Delivered</p>
+        </div>
+      </div>
+    </div>
+</div>

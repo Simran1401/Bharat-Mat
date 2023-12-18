@@ -1,0 +1,22 @@
+<div class="pro-col-2">
+  <ul>
+    <li *ngIf="!dealerisOn">
+      <button routerLinkActive="grey-btn" class="white-btn" [routerLinkActiveOptions]="{exact: true}" routerLink="dashboard-profile">My Profile</button>
+    </li>
+    <li *ngIf="dealerisOn">
+      <button routerLinkActive="grey-btn" class="white-btn" [routerLinkActiveOptions]="{exact: true}" routerLink="dashboard-dealer-profile">My Profile</button>
+    </li>
+    <li>
+      <button routerLinkActive="grey-btn" class="white-btn" routerLink="dashboard-orders-and-returns">Orders and Returns</button>
+    </li>
+    <li>
+      <button routerLinkActive="grey-btn" class="white-btn" routerLink="dashboard-my-address-book" (click)="sendBoolean()">My Address Book</button>
+    </li>
+    <li *ngIf="dealerisOn">
+      <button routerLinkActive="grey-btn" class="white-btn" routerLink="dashboard-wallet" *ngIf="dealerProfileData.have_postpaid">Wallet</button>
+    </li>
+    <li>
+      <button routerLinkActive="" class="white-btn" (click)="logOut()">Logout</button>
+    </li>
+  </ul>
+</div>

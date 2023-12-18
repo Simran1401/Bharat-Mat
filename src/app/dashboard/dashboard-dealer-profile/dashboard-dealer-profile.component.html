@@ -1,0 +1,112 @@
+<div class="pro-col-3" *ngIf="dealerProfileData">
+  <div class="row pro-ro-1">
+    <div class="col-lg-12 pro-col-1">
+      <div class="d-flex mt-3 justify-content-center">
+        <h1 class="new-black-text">Dealer Profile</h1>
+      </div>
+      <button class="bhrt-btn" id="right" (click)="openModal()" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">EDIT</button>
+    </div>
+  </div>
+  <div class="row pro-ro-3">
+    <div class="col-lg-12 pro-col-4">
+      <img src="{{ apiUrl+dealerProfileData.shop_photo }}" alt="img">
+
+      <p class="big-p">{{ dealerProfileData.firm_name }}</p>
+      <p class="small-p">{{ dealerProfileData.email }}</p>
+      <p class="small-p" [style]="dealerProfileData.contact_person ==''? 'display:none':'display:block'">{{
+        dealerProfileData.contact_person }}</p>
+      <span class="{{dealerProfileData.gst_in==''?'d-none':'d-block '}}"><b>GSTIN Number : </b>{{
+        dealerProfileData.gst_in
+        }}</span>
+    </div>
+  </div>
+  <div class="row pro-ro-4">
+    <div class="col-lg-6">
+      <div class="pro-col-5">
+        <div class="d_flex">
+          <img src="../../../assets/images/dashboard/call.png" alt="">
+          <div>
+            <h6>Phone Numbers :</h6>
+            <p>{{ dealerProfileData.mobile_number1 }}</p>
+            <p>{{ dealerProfileData.mobile_number2 }}</p>
+          </div>
+        </div>
+        <div class="d_flex" >
+          <img src="../../../assets/images/dashboard/call.png" alt="">
+          <div>
+            <h6>Landline Number :</h6>
+            <p>{{ dealerProfileData.land_line_number }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="pro-col-5">
+        <div class="d_flex">
+          <img src="../../../assets/images/dashboard/location_on.png" alt="">
+          <div>
+            <h6>Address : </h6>
+            <p>{{ dealerProfileData.address }}</p>
+          </div>
+        </div>
+        <!-- <div class="d_flex">
+          <img src="../../../assets/images/dashboard/location_searching.png" alt="">
+          <div>
+            <h6>Google Map Location : </h6>
+            <p>Location Pin</p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div style="    display: flex;
+  justify-content: center;
+  margin: 20px 0;">
+    <button class="bhrt-btn" id="hidden" (click)="openModal()" data-bs-toggle="modal"
+      data-bs-target="#exampleModal">EDIT</button>
+  </div>
+</div>
+
+<!-- <input type='file' (change)="readUrl($event)">
+<img src="{{url}}"> -->
+
+
+
+<!-- dealer profile -->
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content editProf">
+      <div class="d-flex mt-3 justify-content-center">
+        <h1 class="new-black-text text-center">Update Profile</h1>
+      </div>
+      <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body">
+
+        <form [formGroup]="dealerUpdateForm" (ngSubmit)="updateProfile()">
+          <input type="text" formControlName="name" class="form-input" placeholder="Name"
+            ngModel="{{ dealerProfileData.firm_name}}">
+          <input type="email" formControlName="email" class="form-input" placeholder="Email"
+            ngModel="{{ dealerProfileData.email }}">
+          <input type="number" formControlName="mobile_number2" class="form-input" placeholder="mobile_number2 "
+            ngModel="{{ dealerProfileData.mobile_number2 }}">
+          <input type="number" formControlName="land_line_number" class="form-input" placeholder="land_line_number"
+            ngModel="{{ dealerProfileData.land_line_number }}">
+          <textarea type="email" formControlName="address" class="form-input add" placeholder="address"
+            ngModel="{{ dealerProfileData.address }}" rows="3"></textarea>
+          <input type="file" formControlName="shop_photo" class="form-input choose" placeholder="shop_photo"
+            ngModel="{{ dealerProfileData.shop_photo }}" (change)="onSelect($event)">
+          <div class="d-flex" style="justify-content: center;">
+            <button class="bhrt-btn">Update Profile</button>
+          </div>
+        </form>
+        <br>
+        <!-- <div class="mb-3" *ngIf="statusMsg">
+          <p class="alert alert-success p-1 mb-0 text-center">{{statusMsg}}</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

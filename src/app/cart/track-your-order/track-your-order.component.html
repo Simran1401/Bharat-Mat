@@ -1,0 +1,43 @@
+<div class="track-order-section">
+    <div class="card track-ca">
+        <div class="d-flex mt-3 justify-content-center">
+            <h1 class="new-black-text ">Track Your Order</h1>
+        </div>
+        <p style="font-size: 14px;
+      margin-bottom: 0;" *ngIf="product?.deliver_date">Delivery Estimate</p>
+        <b *ngIf="product?.deliver_date">{{product?.deliver_date | date: 'EEEE'}}</b>
+        <b *ngIf="product?.deliver_date">{{product?.deliver_date | date: 'MMMM'}}</b>
+        <p *ngIf="product?.deliver_date" class="green-p">{{product?.deliver_date | date: 'd'}}</p>
+        <p class="text-p">It’s on Its Way</p>
+        <p *ngIf="product?.deliver_date" class="text-p">{{product?.deliver_date | date: 'MMMM d'}}</p>
+
+        <p class="text-p">Your order Id : {{orderid}}</p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 hh-grayBox pt45 pb20">
+                    <div class="row justify-content-between">
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Ordered<br><span>{{product?.date_time |date: 'MMMM d, y'}} </span></p>
+                        </div>
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Shipped<br><span>{{product?.accept_date | date: 'MMMM d, y'}}</span></p>
+                        </div>
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Out for Delivery<br><span>{{product?.dispatch_date | date: 'MMMM d, y'}}</span></p>
+                        </div>
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Est Delivery<br><span>{{product?.deliver_date | date: 'MMMM d, y'}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="bhrt-btn" routerLink="/dashboard/dashboard-orders-and-returns/orders"> SEE ORDER DETAILS</button>
+    </div>
+</div>
+<!-- Track order section ends -->

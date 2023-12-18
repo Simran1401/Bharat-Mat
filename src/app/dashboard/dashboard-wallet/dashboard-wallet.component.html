@@ -1,0 +1,95 @@
+<div class="row pro-ro-1">
+    <div class="col-lg-12 pro-col-1">
+        <div class="d-flex mt-3 justify-content-center">
+            <h1 class="new-black-text">My Wallet</h1>
+        </div>
+    </div>
+</div>
+<div class="row pro-ro-3">
+    <div class="first-div">
+        <h5>Wallet Balance :</h5>
+        <b>{{walletData.postpaid_limit.useable_amount | currency :'INR'}}</b>
+    </div>
+    <div class="second-div">
+        <h5>Postpaid Limit</h5>
+        <b>{{walletData.postpaid_limit.postpaid_limit | currency :'INR'}}</b>
+    </div>
+    <div class="third-div">
+        <h5>Unsettled Balance :</h5>
+
+        <b>{{walletData.postpaid_limit.payable_amount | currency :'INR'}}</b>
+    </div>
+</div>
+<div class="row pro-ro-4">
+    <div class="col-lg-12 pro-col-4">
+
+        <button class="{{all? 'bhrt-btn bhrt-btn2':'bhrt-w-btn'}}" (click)="showAll()">All</button>
+        <button class="{{debit?'bhrt-btn bhrt-btn2':'bhrt-w-btn'}}" (click)="showDebit()">Debited</button>
+        <button class="{{credit?'bhrt-btn bhrt-btn2':'bhrt-w-btn'}}" style="margin-right: 0;"
+            (click)="showCredit()">Credited</button>
+    </div>
+</div>
+<div *ngIf="all">
+    <div *ngFor="let purchase of walletData.logs">
+        <div class="row pro-ro-5">
+            <div class="col-lg-12">
+                <div class="first5">
+                    <img src="./myWallet-images/Rectangle 219.png" alt="">
+                    <span>
+                        <b>Your wallet has been debited with</b>
+                        <p class="grey-p">Debited on {{purchase.timestamp | date :'shortDate'}}</p>
+                    </span>
+                </div>
+                <div class="second5">
+                    <p class="blue-p">-{{purchase.debit}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row pro-ro-5">
+            <div class="col-lg-12">
+                <div class="first5">
+                    <img src="./myWallet-images/Rectangle 219 (1).png" alt="">
+                    <span>
+                        <b>This amount is credited for test</b>
+                        <p class="grey-p">Credited on {{purchase.timestamp |date:'shortDate'}}</p>
+                    </span>
+                </div>
+                <div class="second5">
+                    <p class="green-p">+{{purchase.credit}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- debit  -->
+
+<div class="row pro-ro-5" *ngIf="debit">
+    <div class="col-lg-12" *ngFor="let purchase of walletData.logs">
+        <div class="first5">
+            <img src="./myWallet-images/Rectangle 219.png" alt="">
+            <span>
+                <b>Your wallet has been debited with</b>
+                <p class="grey-p">Debited on {{purchase.timestamp |date:'shortDate'}}</p>
+            </span>
+        </div>
+        <div class="second5">
+            <p class="blue-p">-{{purchase.debit}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row pro-ro-5" *ngIf="credit">
+    <div class="col-lg-12" *ngFor="let purchase of walletData.logs">
+        <div class="first5">
+            <img src="./myWallet-images/Rectangle 219 (1).png" alt="">
+            <span>
+                <b>This amount is credited for test</b>
+                <p class="grey-p">Credited on {{purchase.timestamp |date:'shortDate'}}</p>
+            </span>
+        </div>
+        <div class="second5">
+            <p class="green-p">+{{purchase.credit}}</p>
+        </div>
+    </div>
+</div>

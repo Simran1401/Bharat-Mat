@@ -1,0 +1,181 @@
+<div>
+  <app-log-in-Sign-up (info)="backDropClicked($event)" *ngIf="LogInModalOpen">
+  </app-log-in-Sign-up>
+</div>
+
+<!-- Product First section -->
+<div *ngFor="let Product of Products">
+
+  <div class="product-first-section">
+    <div class="container pro-first-co">
+      <div class="row pro-first-ro">
+        <div class="col-lg-6">
+          <div class="pro-first-img-part">
+            <img src="{{ apiUrl+image1}}" alt="" class="main-img">
+            <div class="row">
+              <div class="col-sm-4 sub-imgs" style="cursor: pointer;" [style]="image2 =='None'? 'display:none':'display:block'">
+                <img src="{{ apiUrl+image2}}" alt="" *ngIf="img2" (click)="displayImg1()">
+                <img src="{{ apiUrl+image_2}}" alt="" *ngIf="img_2" (click)="displayImg_1()">
+              </div>
+              <div class="col-sm-4 sub-imgs" style="cursor: pointer;" [style]="image3 =='None'? 'display:none':'display:block'">
+                <img src="{{ apiUrl+image3}}" alt="" *ngIf="img3" (click)="displayImg2()">
+                <img src="{{ apiUrl+image_3}}" alt="" *ngIf="img_3" (click)="displayImg_2()">
+              </div>
+              <div class="col-sm-4 sub-imgs" style="cursor: pointer;" [style]="image4 =='None'? 'display:none':'display:block'">
+                <img src="{{ apiUrl+image4}}" alt="" *ngIf="img4" (click)="displayImg3()">
+                <img src="{{ apiUrl+image_4}}" alt="" *ngIf="img_4" (click)="displayImg_3()">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="pro-first-content-part">
+            <div class="d-flex mt-3 justify-content-center">
+              <!-- <h1 class="new-black-text mb-2">Bharat Mat</h1> -->
+            </div>
+            <div class="mob-res">
+
+              <p class="new-black-text">{{ Product.name }}</p>
+            </div>
+
+            <span class="s-one"> &#8377;{{ Product.discount!= 0 || ''?
+              Product.price-(Product.discount*Product.price/100):
+              Product.price}}</span>
+
+            <span class="s-two" *ngIf="Product.discount != 0 || ''">{{'&#8377;'+ Product.price }} </span>
+            <span *ngIf="Product.discount != 0 || ''"> ({{Product.discount + '%Off'}}) </span>
+           <ul class="text-p">
+            <li [innerHTML]="Product.description" style="list-style: none;"></li>
+           </ul>
+            <div class="d-flex justify-content-center">
+              <button class="bhrt-w-btn mt-3" (click)="NavToCartPage(Product)">QUICK BUY</button>
+              <button class="bhrt-btn mt-3" (click)="addToCart(Product)" *ngIf="!addedToList">ADD</button>
+
+              <span class="input-group shadow-sm rounded mt-3 inc" *ngIf="addedToList">
+                <div class="input-group-btn">
+                  <button id="down" class="btn btn-default"
+                    (click)="decreaseValue(this.ProductsInCart[this.id],Product)"><span
+                      class="glyphicon glyphicon-minus">-</span></button>
+                </div>
+                <input type="text" id="myNumber1" class="form-control input-number text-center" readonly
+                  value="{{this.ProductsInCart[this.id]?.quantity}}" />
+                <div class="input-group-btn">
+                  <button id="up" class="btn btn-default" (click)="increaseValue(this.ProductsInCart[this.id])"><span
+                      class="glyphicon glyphicon-plus">+</span></button>
+                </div>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Product First section -->
+
+
+  <!-- Product Second section -->
+  <div class="pro-second-section">
+    <div class="container pro-second-co">
+      <div class="row" style="align-items: center;">
+        <div class="col-sm-12 text-end rev mt-3">
+          <!-- <button class="bhrt-btn" (click)="addReview()">ADD REVIEW</button> -->
+          <button type="button" class="bhrt-btn" (click)="openModal()" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">ADD REVIEW</button>
+
+
+          <!-- Modal -->
+          <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="d-flex mt-3 justify-content-center">
+                  <h1 class="new-black-text text-center">Add Review</h1>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+                    <label for="" class="text-p mb-0">Name</label>
+                    <input class="form-control mb-3" type="text" formControlName="reviewName" placeholder="Name">
+                    <label for="" class="text-p mb-0">Review</label>
+                    <textarea class="form-control mb-3" type="text" name="stars" formControlName="reviewDesc"
+                      placeholder="Description" style="height: 100px;"></textarea>
+                    <div class="rating">
+                      <label>
+                        <input #starsOne type="radio" value="1" name="stars" (click)="clickStar(starsOne)" />
+                        <span class="icon">★</span>
+                      </label>
+                      <label>
+                        <input #starsTwo type="radio" value="2" name="stars" (click)="clickStar(starsTwo)" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                      </label>
+                      <label>
+                        <input #starsThree type="radio" value="3" name="stars" (click)="clickStar(starsThree)" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                      </label>
+                      <label>
+                        <input #starsFour type="radio" value="4" name="stars" (click)="clickStar(starsFour)" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                      </label>
+                      <label>
+                        <input #starsFive type="radio" value="5" name="stars" (click)="clickStar(starsFive)" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                      </label>
+                    </div>
+                    <div style="display:flex; justify-content:center;">
+                      <button class="bhrt-btn mt-2 d-block" type="submit">Submit</button>
+                    </div>
+                    <div class="alert alert-danger mt-3" *ngIf="errorMessege">{{ errorMessege }}</div>
+                    <!-- <div class="alert alert-success mt-3" *ngIf="successMessege">{{ successMessege }}</div> -->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex mt-3 justify-content-center">
+            <h1 class="new-black-text " style="margin-bottom: 0;">Reviews</h1>
+          </div>
+        </div>
+        <span class="fs-2 text-center mt-3" *ngIf="Product.reviews.length <= 0 && !addreviewSec">No reviews yet
+          !!</span>
+      </div>
+      <div class="row pro-second-ro">
+        <div class="col-lg-12">
+          <div class="review-box" *ngFor="let prodRev of Product.reviews">
+            <div class="review-img-box">
+              <div class="d-flex mt-3 justify-content-center">
+                <h1 class="new-black-text ">{{ prodRev.user_name }}</h1>
+              </div>
+              <!-- <img src="../../../../assets/images/product-page-images/Ellipse 54.png" alt="" height="97" width="97"
+                style=" margin: 10px 0; display: block;"> -->
+              <div *ngIf="prodRev.rate == 1"><span class="iconOneReview">★</span></div>
+              <div *ngIf="prodRev.rate == 2"><span class="iconOneReview">★★</span></div>
+              <div *ngIf="prodRev.rate == 3"><span class="iconOneReview">★★★</span></div>
+              <div *ngIf="prodRev.rate == 4"><span class="iconOneReview">★★★★</span></div>
+              <div *ngIf="prodRev.rate == 5"><span class="iconOneReview">★★★★★</span></div>
+            </div>
+            <div class="review-content-box">
+              <p class="text-p">
+                {{ prodRev.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Product Second section -->

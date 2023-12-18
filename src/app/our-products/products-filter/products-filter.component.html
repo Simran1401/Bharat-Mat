@@ -1,0 +1,56 @@
+<div class="row justify-content-start d-block left-block">
+  <div class="col-12 heading mb-4">
+    Categories
+  </div>
+  <div class="col-12 " *ngFor="let category of categories; let i = index">
+    <form>
+      <label class="container">{{ category.title }}
+        <input type="checkbox" (click)="gettingId(category.id)">
+        <input type="checkbox"  [checked]="this.id==1 && cow?i==0:false">
+        <input type="checkbox"  [checked]="this.id==2 && gym?i==1:false">
+        <input type="checkbox"  [checked]="this.id==3 && animal?i==2:false">
+      
+        <span class="checkmark"></span>
+      </label>
+    </form>
+  </div>
+  <div class="price-flex align-items-center justify-content-between mt-5">
+    <p class="heading mb-0">
+      Price Range
+    </p>
+    <p class="rangeSelected mb-0">&#8377;{{ minValuePr }} - &#8377;{{ maxValuePr }}</p>
+  </div>
+  <div class="col-7 mt-4">
+    <div class="slider">
+      <div class="progress" #progressBarStylePriceRange></div>
+    </div>
+    <div class="range-input">
+      <input type="range" class="range-min" min="100" max="10000" step="1" value="0" #minSlidePr
+        (input)="ChangingWidthOfPriceRange($event)">
+      <input type="range" class="range-max" min="100" max="10000" step="1" value="10000" #maxSlidePr
+        (input)="ChangingWidthOfPriceRange($event)">
+    </div>
+
+  </div>
+  <div class="price-flex align-items-center justify-content-between mt-5">
+    <p class="heading mb-0">
+      Discount
+    </p>
+    <p class="rangeSelected mb-0">{{ minValueDiscount + '%'}} - {{ maxValueDiscount + '%'}}</p>
+  </div>
+  <div class="col-7 mt-4">
+    <div class="slider">
+      <div class="progress" #progressBarStyleDiscount></div>
+    </div>
+    <div class="range-input">
+      <input type="range" class="range-min" max="100" step="1" value="0" #minSlideDiscount
+        (input)="ChangingWidthOfDiscount($event)">
+      <input type="range" class="range-max" max="100" step="1" value="100" #maxSlideDiscount
+        (input)="ChangingWidthOfDiscount($event)">
+    </div>
+  </div>
+  <div class="col-12 mt-4">
+    <button class="bhrt-btn" (click)="applytheFilter()"*ngIf="!this.id">Apply</button>
+    <button class="bhrt-btn" (click)="appyfilter2()" *ngIf="this.id">Apply</button>
+  </div>
+</div>

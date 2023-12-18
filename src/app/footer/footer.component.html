@@ -1,0 +1,310 @@
+<!-- <footer *ngIf="footerDetailsFromBackend">
+  <div class="container footer-part">
+    <div class="first-col">
+      <div class="img-flex">
+        <img src="../../assets/images/footer-image/logo.png" alt="" class="logo">
+      </div>
+      <p>{{ footerDetailsFromBackend.short_description }}
+      <form class="inputs-div" [formGroup]="subscirbeForm">
+        <input type="email" placeholder="Enter your email" formControlName="email" name="email" class="email-input">
+        <button type="submit" class="bhrt-btn btn2" (click)="onSubscribe()">SUBSCRIBE</button>
+        <button type="submit" class="bhrt-btn btn2" (click)="onSubscribe()">SUBSCRIBE</button>
+      </form>
+      <div *ngIf="messege" class="alert alert-danger">
+        {{ messege }}
+      </div>
+      <div *ngIf="successMessege" class="alert alert-success">
+        {{ successMessege }}
+      </div>
+    </div>
+
+    <div class="fourth-col" id="hidden-col">
+      <h1>Get in touch</h1>
+ 
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Phone</td>
+            <td> <a href="tel:{{footerDetailsFromBackend.phone}}" style="color: #F5F5F5;font-family: 'Open Sans';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 18px;
+              line-height: 25px;">{{ footerDetailsFromBackend.phone }}</a></td>  
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td> <a href="mailto:{{footerDetailsFromBackend.email}}" style="color: #F5F5F5;font-family: 'Nunito';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 32px;">{{ footerDetailsFromBackend.email }}</a></td>   
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td style="font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 30px;">{{footerDetailsFromBackend.address}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="fourth-col screen-resol mt-3 container " style="margin-left: 8%;">
+      <h1>Get in touch</h1>
+      
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Phone</td>
+            <td> <a href="tel:{{footerDetailsFromBackend.phone}}" style="color: #F5F5F5;font-family: 'Open Sans';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 18px;
+              line-height: 25px;">{{ footerDetailsFromBackend.phone }}</a></td>  
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td> <a href="mailto:{{footerDetailsFromBackend.email}}" style="color: #F5F5F5;font-family: 'Nunito';
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 32px;">{{ footerDetailsFromBackend.email }}</a></td>   
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td style="font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 30px;">{{footerDetailsFromBackend.address}}</td>
+          </tr>
+        </tbody>
+      </table>
+ 
+      
+    </div>
+
+ 
+   <div class="container screen-resol">
+    <img src="../../assets/images/footer-image/Line 56.png" alt="" class="w-100" >
+   </div>
+
+    <div class="sec-third-flex">
+     
+     
+      <div class="second-col">
+        <h1 class="mb-2">Useful Links</h1>
+        <ul>
+          <li>
+            <a href="/FAQ">FAQs</a>
+            <a href="/FAQ">FAQs</a>
+          </li>
+          <li>
+            <a href="/about-us">About Us</a>
+          </li>
+          <li>
+            <a href="/contact-us">Contact Us</a>
+          </li>
+          <li>
+            <a href="/testimonials">Testimonails</a>
+          </li>
+          <li>
+            <a href="/become-a-dealer">Become a Dealer</a>
+          </li>
+          <li>
+            <a routerLink="/carrier">Careers</a>
+          </li>
+        </ul>
+      </div>
+      <div class="third-col">
+        <h1 class="mb-2">Need Help?</h1>
+        <ul>
+          <li>
+            <a href="/diclaimer">Disclaimer</a>
+          </li>
+          <li>
+            <a href="/privacy-policy">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/shipping-policy">Shipping Policy</a>
+          </li>
+          <li>
+            <a href="/terms-of-services">Terms of Service</a>
+          </li>
+          <li>
+            <a href="/return-refund-and-cancellation-policy">Return, Refund and Cancellations Policy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+ </div>
+  <div class="container">
+   <img src="../../assets/images/footer-image/Line 55.png" alt="" class="w-100 screen-resol" >
+   <img src="../../assets/images/footer-image/Line 52.png" alt="" class="w-100 screen-resol-hide" >
+   <img src="../../assets/images/footer-image/Line 55.png" alt="" class="w-100 screen-resol" >
+   <img src="../../assets/images/footer-image/Line 52.png" alt="" class="w-100 screen-resol-hide" >
+    <div class="footer-bottom-part ">
+      <a href="https://gftpl.in/">
+        <p>© 2022 All Right Reserved | Proudly Coded by <b> Team GFTPL </b></p>
+      </a>
+      <div>
+        <a href="{{apiUrl+footerDetailsFromBackend.facebook_link}}">
+          <img src="../../assets/images/footer-image/facebk.png" alt="">
+          <img src="../../assets/images/footer-image/facebk.png" alt="">
+        </a>
+        <a href="{{ apiUrl+footerDetailsFromBackend.linkedin_link }}">
+    </a>
+        <a href="{{ apiUrl+footerDetailsFromBackend.twitter_link }}">
+          <img src="../../assets/images/footer-image/Twitter Circled.png" alt="">
+        </a>
+        <a href="{{ apiUrl+footerDetailsFromBackend.youtube_link }}">
+          <i class="bi bi-youtube"></i>
+    </a>
+      </div>
+    </div>
+  </div>
+</footer> -->
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+  integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+<!-- <iframe [src]="mapLink" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen="" loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade" class="openIframe"></iframe> -->
+
+
+<footer class="footer " *ngIf="footerDetailsFromBackend">
+  <div class="container bottom_border">
+    <div class="row">
+      <div class=" col-sm-4 response1 ">
+        <div class="first-col" style="cursor: pointer;">
+          <a href="/" style=" text-decoration: none; color: transparent;">
+
+            <img src="../../assets/images/footer-image/logo.png" alt="" width="158" height="149">
+          </a>
+        </div>
+        <a class="mb10 col_white_amrc" href="/" style="cursor: pointer;text-decoration: none; color: transparent;">{{
+          footerDetailsFromBackend.short_description }}</a>
+        <div class="d-inline-flex mb-3">
+          <form class="form" [formGroup]="subscirbeForm">
+            <input type="text" placeholder="Enter Your Email" class="input" formControlName="email">
+            <button class="sub-btn" (click)="onSubscribe()">Subscribe</button>
+          </form>
+        </div>
+        <div *ngIf="messege" class="alert alert-danger d-inline-block" style="cursor: pointer;">
+          {{ messege }}
+        </div>
+        <!-- <div *ngIf="successMessege" class="alert alert-success d-inline-block" style="cursor: pointer;">
+          {{ successMessege }}
+        </div> -->
+      </div>
+
+      <div class=" col-sm-4 response2 mb-5">
+        <p class="head col_white_amrc pt2 new-black-text">Get in touch</p>
+
+        <ul class="footer_ul2_amrc col_white_amrc">
+          <li>
+            <div class="list-div" id="phone_div">
+              <p class="prag">Phone</p>
+              <a class="redirect" href="tel:{{footerDetailsFromBackend.phone}}">{{footerDetailsFromBackend.phone}}</a>
+            </div>
+          </li>
+          <li>
+            <div class="list-div" id="mail_div">
+              <p class="prag">Email</p>
+              <a class="redirect-email col_white_amrc"
+                href="mailto:{{footerDetailsFromBackend.email}}">{{footerDetailsFromBackend.email}}</a>
+            </div>
+          </li>
+          <li>
+            <div class="list-div " style="gap: 5%;">
+              <p class="prag">Address</p>
+              <a class="redirect" href="{{addressLoc}}" target="_blank">{{footerDetailsFromBackend.address}}</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+      <img src="../../assets/images/footer-image/Line 56.png" alt="" class="w-100 screen-resol">
+
+      <div class=" col-sm-2 col_white_amrc response3">
+        <p class="head pt2 new-black-text">Useful Link</p>
+
+        <ul class="footer_ul_amrc links">
+          <li><a href="/FAQ">FAQ’s</a></li>
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/contact-us">Contact Us</a></li>
+          <li><a href="/testimonials">Testimonials</a></li>
+          <li *ngIf="LoggedInCorrecttion"><a href="/become-a-dealer">Become a Dealer</a></li>
+          <li><a href="/carrier">Careers</a></li>
+          <li><a href="/dealers-comp">Our Networks</a></li>
+        </ul>
+      </div>
+
+
+      <div class=" col-sm-2 response4 col_white_amrc">
+        <p class="head pt2 new-black-text">Need Help ?</p>
+        <ul class="footer_ul_amrc links">
+          <li><a href="/diclaimer">Disclaimer</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/shipping-policy"> Shipping Policy</a></li>
+          <li><a href="/terms-of-services">Terms of Service</a></li>
+          <li><a href="/return-refund-and-cancellation-policy">Return, Refund &
+              Cancellations Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container col_white_amrc ">
+
+    <img src="../../assets/images/footer-image/Line 55.png" alt="" class="w-100 screen-resol">
+    <img src="../../assets/images/footer-image/Line 52.png" alt="" class="w-100 screen-resol-hide" width="1296"
+      height="7.3">
+    <div class="mt-3 w-100 social">
+      <p class="bottom ">© 2022 All Right Reserved | Proudly Coded by <a href="https://gftpl.in/" target="_blank">Team
+          GFTPL</a></p>
+      <div class="icons">
+        <ul class="social_footer_ul ">
+          <li> <a href="{{footerDetailsFromBackend.whatsapp_link }}" target="_blank">
+              <img width="44.55" height="44.55" src="../../assets/images/footer-image/Group_38590.webp" alt="">
+            </a>
+          </li>
+          <li> <a href="{{footerDetailsFromBackend.linkedin_link }}" target="_blank">
+              <img height="44" width="44" src="../../assets/images/footer-image/Group_38591.webp" alt="">
+            </a>
+          </li>
+          <li> <a href="{{footerDetailsFromBackend.facebook_link }}" target="_blank">
+              <img height="44" width="44" src="../../assets/images/footer-image/Group_38593.webp" alt="">
+            </a>
+          </li>
+          <li> <a href="{{footerDetailsFromBackend.twitter_link  }}" target="_blank">
+              <img height="44" width="44" src="../../assets/images/footer-image/Group_38592.webp" alt="">
+            </a>
+          </li>
+          <li> <a href="{{footerDetailsFromBackend.instagram_link }}" target="_blank">
+              <img height="40.15" width="40.15" src="../../assets/images/footer-image/Group_38594.webp" alt="">
+            </a>
+          </li>
+          <li> <a href="{{footerDetailsFromBackend.youtube_link}}" target="_blank">
+              <img width="44.55" height="33" src="../../assets/images/footer-image/Group_38595.webp" alt="">
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+</footer>

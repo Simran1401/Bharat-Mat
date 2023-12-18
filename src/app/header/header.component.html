@@ -1,0 +1,148 @@
+<div>
+  <app-log-in-Sign-up (info)="backDropClicked($event)" *ngIf="LogInModalOpen">
+  </app-log-in-Sign-up>
+</div>
+
+<div class="container">
+  <ul class="nav_bar">
+    <li class="text-center d-flex align-items-center">
+      <a class="navbar-brand " href="/">
+        <img src="../../assets/images/header_images/logo.png" alt="" width="121" height="114">
+      </a>
+      <a class="nav-link nav-head" href="/">Bharat Mats</a>
+    </li>
+    <li style="display:flex;">
+      <div class="shop_cart">
+        <button type="button" class="btn btn-primary position-relative shop-btn" *ngIf="!LoggedInCorrecttion">
+          <a class="cd-img-replace" (click)="openLogInModal()">
+            <img src="../../assets/images/header_images/shopping_cart.png" alt="" class="cd-img-replace" width="19.8"
+              height="19.8">
+            <!-- <span *ngIf="numberOfproductInCart >= 1" class="position-absolute top_0 translate-middle badge rounded-pill"
+              style="background-color: #003647;">
+              {{ numberOfproductInCart }}
+              <span class="visually-hidden">unread messages</span>
+            </span> -->
+          </a>
+        </button>
+        <button type="button" class="btn btn-primary position-relative shop-btn" id="cd-cart-trigger"
+          *ngIf="LoggedInCorrecttion">
+          <a class="cd-img-replace">
+            <img src="../../assets/images/header_images/shopping_cart.png" alt="" class="cd-img-replace" width="19.8"
+              height="19.8">
+            <span *ngIf="numberOfproductInCart >= 1" class="position-absolute top_0 translate-middle badge rounded-pill"
+              style="background-color: #003647;">
+              {{ numberOfproductInCart }}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </a>
+        </button>
+      </div>
+      <div *ngIf="!LoggedInCorrecttion">
+        <button type="button" class="nav-link login-btn d-none d-lg-block" (click)="openLogInModal()">
+          LOGIN
+        </button>
+        <img class="d-block d-lg-none" style="border-radius: 50%; background-color: #003647" (click)="openLogInModal()"
+          src="../../assets/images/header_images/icons8-male-user-100 (1) 1.png">
+      </div>
+      <div *ngIf="LoggedInCorrecttion">
+        <div class="dropdown-center">
+          <button class="btn dropdown-toggle d-none d-md-block" style="font-family: 'lato', 'sans-serif';" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            MY ACCOUNT
+          </button>
+          <button class="btn d-block d-md-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../../assets/images/header_images/menu.png" alt="">
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" (click)="openProfile()">My Profile</a></li>
+            <li><a class="dropdown-item" (click)="ordersAndReturns()">Orders & Returns</a></li>
+            <li><a class="dropdown-item" (click)="myAddress()">My Addresses</a></li>
+            <li><a class="dropdown-item" (click)="wallet()" *ngIf="dealerisOn">Wallet</a></li>
+            <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div id="cd-shadow-layer"></div>
+  <div id="cd-cart">
+    <div class="pos-absolute h-100">
+      <div class="d-flex justify-content-center my-3">
+        <h1 class="new-black-text">Cart</h1>
+      </div>
+      <div class="container cart_dropdown">
+        <button type="button" id="close-cart" class="btn-close" aria-label="Close"></button>
+        <div class="whenListIsEmpty" *ngIf="numberOfproductInCart <= 0 || !productList">
+          <div class="empty-box">
+            <img src="../../assets/images/cart-Images/empty-cart-2130356-1800917 1.svg" alt="" width="496" height="331">
+            <p class="dark-b">Your Cart Is Empty</p>
+            <p class="text-p">Looks like you haven’t made your choice yet</p>
+            <a href="/our-products" style="text-decoration: none;">
+              <button class="bhrt-btn">CONTINUE SHOPPING</button>
+            </a>
+          </div>
+        </div>
+        <div class="main-prod-div" *ngFor="let product of productList; let i = index">
+          <div class="products-box cart-product-bg">
+            <div class="row">
+              <div class="col-sm-3" id="img-box">
+                <img class="imageinCartSLide" src="{{apiUrl+product?.image1}}" alt="" width="99" height="115">
+              </div>
+              <div class="col-sm-6">
+                <b>{{ product?.name }}</b>
+                <p [innerHTML]="(product?.description | slice:0: 25) +'...'"></p>
+                <div class="input-group">
+                  <div class="input-group-btn">
+                    <button id="down" class="btn btn-default" (click)="decrease(product)"><span
+                        class="glyphicon glyphicon-minus">-</span></button>
+                  </div>
+                  <input id="myNumber" value="{{product?.quantity}}" readonly class="form-control input-number">
+                  <div class="input-group-btn">
+                    <button id="up" class="btn btn-default" (click)="increase(product)"><span
+                        class="glyphicon glyphicon-plus">+</span></button>
+                  </div>
+                </div>
+                <span>&nbsp;x&nbsp;{{ product.price/ product.quantity }}</span>
+              </div>
+              <div class="col-sm-3 dlt-part">
+                <a (click)="removeIt(product)">
+                  <img class="w-50" src="../../assets/images/header_images/Rectangle 217.png" alt="" width="49"
+                    height="43">
+                </a>
+                <p>&#8377;{{ product?.discount != 0 || ''? product?.price-(product?.discount*product?.price/100) :
+                  product?.price}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cartside" style="padding: 0;">
+        <div class="grey-box" *ngIf="numberOfproductInCart >= 1">
+          <p>Subtotal:&nbsp; {{ subTotal |currency:'INR' }}</p>
+          <p *ngIf="discount>0">Discount:&nbsp; {{'-' + (discount | currency:'INR') }}</p>
+          <p style="margin-bottom: 0;padding-bottom:6px;">Delivery Charges: ₹ 0</p>
+        </div>
+        <div class="dark-box cart-bg" (click)="NavToCartPage()">
+          <p id="close-cart2" class="mb-0">{{ numberOfproductInCart >= 1? 'PROCEED TO PAY': '' }}</p>
+          <span style="margin-bottom: 0;">{{ numberOfproductInCart >= 1? 'Total : &nbsp;' + '₹' + theTotal : ''
+            }}</span>
+        </div>
+      </div>
+      <!-- cd-cart -->
+    </div>
+  </div>
+</div>
+
+
+<div class="flag-part">
+  <div class="orange">
+
+  </div>
+  <div class="white">
+    <img src="../../assets/images/header_images/flag-of-india 1.png" alt="" width="24" height="23">
+  </div>
+  <div class="green">
+
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="about-section">
+    <div class="container-fluid about-co" *ngIf="aboutUsDetails">
+        <div class="d-flex mt-3 justify-content-center">
+            <h1 class="d-inline new-black-text">{{ aboutUsDetails.title }}</h1>
+        </div>
+        <div class="row about-ro">
+            <div class="col-lg-6 img-part cart-product-bg">
+                <img src="{{ apiUrl+aboutUsDetails.image }}" alt="">
+            </div>
+            <div class="white-box" id="hidden">
+                <div class="row white-ro">
+                    <div class="col-sm-4 white-co">
+                        <h1>{{ aboutUsDetails.founded }}</h1>
+                        <p>Founded</p>
+                    </div>
+                    <div class="col-sm-4 white-co">
+                        <h1>{{ productSoldCounter + 'k+' }}</h1>
+                        <p>Product Sold</p>
+                    </div>
+                    <div class="col-sm-4 white-co">
+                        <h1 style="border-right:none;">{{ bestReviewCounter +'k+'}}</h1>
+                        <p style="border-right:none;">Best Reviews</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 content-part">
+                <div>
+                    <!-- <h3>A Brief of our 10 years success</h3> -->
+                    <p class="text-p">{{ aboutUsDetails.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="white-box" id="hidden-2">
+            <div class="row white-ro">
+                <div class="col-sm-4 white-co">
+                    <h1>{{ aboutUsDetails.founded }}</h1>
+                    <p>Founded</p>
+                </div>
+                <div class="col-sm-4 white-co">
+                    <h1>{{ productSoldCounter + 'k+' }}</h1>
+                    <p>Product Sold</p>
+                </div>
+                <div class="col-sm-4 white-co">
+                    <h1 style="border-right:none;">{{ bestReviewCounter +'k+'}}</h1>
+                    <p style="border-right:none;">Best Reviews</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container our-team">
+        <div class="d-flex mt-3 justify-content-center">
+            <h1 class="new-black-text">Our Team</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3" *ngFor="let team of ourTeam">
+                <div class="circle-imgs">
+                    <img src="{{ apiUrl+team.image }}" alt="">
+                    <h2>{{ team.name }}</h2>
+                    <p class="text-p">{{ team.designation }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

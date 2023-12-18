@@ -1,0 +1,143 @@
+<!-- cart section starts -->
+<div class="cart-section">
+  <div class="container cart-co">
+    <div class="d-flex mt-3 justify-content-center">
+      <h1 class="new-black-text">Your Cart</h1>
+    </div>
+    <div class="row cart-ro">
+      <div class="col-lg-8">
+        <div class="cart-products" *ngFor="let product of Products">
+          <div class="cart-products-box">
+            <div class="row">
+              <div class="col-lg-4 cart-prod-img-part">
+                <img src="{{ apiUrl+product.image1 }}" alt="">
+              </div>
+              <div class="col-lg-8">
+                <div class="cart-prod-content-part">
+                  <h5><b>Bharat Cow Mat</b></h5>
+                  <div class="pos-absolute">
+                    <p class="text-p mb-0">Price</p>
+                    <b>₹{{ product.price /product.quantity}}</b>
+
+                  </div>
+                  <div class="input-group shadow-sm rounded">
+                    <div class="input-group-btn">
+                      <button id="down" class="btn btn-default" (click)="decreaseValue(product)"><span
+                          class="glyphicon glyphicon-minus">-</span></button>
+                    </div>
+                    <input type="text" id="myNumber1" class="form-control input-number" readonly value="{{product.quantity}}" />
+                    <div class="input-group-btn">
+                      <button id="up" class="btn btn-default" (click)="increaseValue(product)"><span
+                          class="glyphicon glyphicon-plus">+</span></button>
+                    </div>
+                  </div>
+                  <span (click)="removeIt(product)">
+                    <img class="dustbin-img" src="../../assets/images/cart-Images/Rectangle 217.png" alt="">
+                  </span>
+                  <hr>
+                  <p class="text-p fw-bold">₹{{ product.price }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p *ngIf="Products.length" class="text-p" style="float: right;">Subtotal ({{ totalCount }} items): <b>₹{{
+            totalAmount }}</b> </p>
+
+        <!-- <p *ngIf="Products.length && couponApply" class="text-p" style="float: right;">Subtotal ({{ totalCount }} items):
+              <b>{{totalAmount *couponDiscount/100 | currency :'INR'  }}</b> </p> -->
+
+        <div *ngIf="!Products.length">
+          <span class="h3">
+            Oops! <br>
+            Looks like you don't have anything left in your cart anymore!! <br>
+          </span>
+          <button class="bhrt-btn mt-4 mb-3" (click)="goToProductLIst()">Go Shop Now!</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="summary-part">
+          <h2>Order Summary</h2>
+          <!-- Button trigger modal -->
+          <button type="button" class="ac-btn" data-bs-toggle="modal" data-bs-target="#exampleModalac" *ngIf="couponApply">
+            Coupon Applied
+            <p>></p>
+          </button>
+          <button type="button" class="ac-btn" data-bs-toggle="modal" data-bs-target="#exampleModalac" *ngIf="!couponApply">
+            Apply Coupon
+            <p>></p>
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalac" tabindex="-1" aria-labelledby="exampleModalLabelac"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content mc">
+                <div class="modal-header mh">
+                  <h5 class="modal-title" id="exampleModalLabelac">Available Coupons</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body mb">
+                  <div class="freetoday-box" *ngFor="let coupon of getCoupon">
+
+                    <div *ngIf="totalAmount>=coupon.min_apply_amount">
+                      <span class="free">{{coupon.coupon_code}}</span>
+
+                      <button (click)="applyCoupon(coupon,coupon.id)" [disabled]="totalAmount <= coupon.min_apply_amount" >{{this.couponId==coupon.id?'APPLIED': 'APPLY'}}</button>
+                      <!-- <button (click)="removeCoupon()" *ngIf="this.couponId==coupon.id">Remove Coupon</button> -->
+                    </div>
+
+                    <p class="alert alert-success p-1 mb-0 text-center" *ngIf="this.couponId==coupon.id">Coupon Applied:
+                      {{coupon.coupon_code}} </p>
+
+                    <p class="alert alert-danger p-1 mb-0 text-start" *ngIf="totalAmount<coupon.min_apply_amount">The
+                      minimum amount to apply coupon is
+                      {{coupon.min_apply_amount}} </p>
+
+                    <p class="p-lg mt-3">Apply Code {{coupon.coupon_code}} to Avail Huge Discounts</p>
+                    <p class="p-sm">Upto to {{coupon.discount_percent +'%'}} off & Free shipping</p>
+                    <p class="p-sm mb-3">This Coupon can be applied on the order of {{ coupon.min_apply_amount }}₹ or above</p>
+                  </div>
+                </div>
+                <div class="modal-footer mf">
+                  <!-- <button type="button" class="btn btn-secondary"
+                                          data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="main-ac">
+            <div class="ac-btn2">
+              <div class="first-os">
+                <p>Cart Value</p>
+                <p class="green-p" *ngIf="discount>0">Discount</p>
+                <p class="green-p" *ngIf="this.coupDat">Coupon Discount</p>
+              </div>
+              <div class="second-os">
+                <p>₹{{ subTotal }}</p>
+                <p class="green-p" *ngIf="discount>0">₹ - {{ discount }}</p>
+
+                <p class="green-p" *ngIf="this.coupDat">₹ - {{ (subTotal *couponDiscount/100) > this.coupDat.maximum_off? this.coupDat.maximum_off: (subTotal *couponDiscount/100) }}</p>
+
+              </div>
+            </div>
+            <hr>
+            <div class="third-os">
+              <p>Total Cost</p>
+              <div>
+                <b *ngIf="!couponApply">₹{{totalAmount}}</b>
+                <b *ngIf="couponApply">{{ totalAmount - (subTotal *couponDiscount/100 )| currency :'INR' }}</b>
+                <p>( Inclusive of all taxes )</p>
+              </div>
+            </div>
+            <button class="bhrt-btn mt-4 mb-3" (click)="goToShoppingCart()" [disabled]="Products?.length==0">PROCEED TO
+              BUY</button>
+          </div>
+          <!-- <button class="bhrt-btn" (click)="goToShoppingCart()">PROCEED TO BUY</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- cart section ends -->

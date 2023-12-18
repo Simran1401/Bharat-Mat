@@ -1,0 +1,126 @@
+.form-control {
+  border: 2px solid #003647;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.text-h1 {
+  font-family: "Frank Ruhl Libre", serif;
+  font-weight: 700;
+  font-size: 54px;
+  margin-bottom: 30px;
+  color: #242D3E;
+  text-align: center;
+}
+
+.icons-footer {
+
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 10px;
+  /* margin-bottom: 40px; */
+}
+
+.icons-footer svg {
+  height: 35px;
+  width: 35px;
+  color: #fff;
+}
+
+.img-part img {
+  width: 100%;
+}
+
+#exampleFormControlTextarea1 {
+  height: 150px;
+}
+
+.content-part {
+  text-align: center;
+}
+
+.contact-co {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.captcha-part {
+  width: 60%;
+}
+
+.img-part {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.icon-div span a {
+  text-decoration: none;
+  color: #000;
+  font-size: 22px;
+}
+
+.icon-div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.captcha-div {
+  width: 60%;
+}
+
+@media (max-width:1280px) {
+  .icons-footer svg {
+    height: 25px;
+    width: 25px;
+  }
+
+  .icons-footer {
+    height: 60px;
+    width: 60px;
+  }
+
+  .address_part {
+    width: 50%;
+  }
+}
+
+@media (max-width: 760px) {
+  .text-h1 {
+    font-size: 40px;
+  }
+
+  .captcha-div {
+    width: 100%;
+  }
+
+  .icon-div span {
+    width: 80%;
+  }
+
+  .icon-div span a {
+    font-size: 15px;
+  }
+
+  .captcha-part {
+    width: 100%;
+  }
+
+  .icons-footer {
+    height: 40px;
+    width: 40px;
+  }
+
+  .img-part {
+    justify-content: center;
+  }
+
+  .icons-footer svg {
+    height: 20px;
+    width: 20px;
+  }
+}

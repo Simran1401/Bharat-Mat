@@ -1,0 +1,177 @@
+<div class="pro-col-3" *ngIf="Orders">
+  <div class="order-table" *ngFor="let Order of Orders">
+    <div class="row pro-ro-4">
+      <div class="col-lg-6">
+        <div class="order-box">
+          <div class="first-div">
+            <span>
+              <b>Order No.</b>#{{ Order.id }}
+            </span>
+            <b>Order Status: {{Order.order_status}}</b>
+          </div>
+          <div class="second-div">
+            <b>Order Date</b>
+            <p>{{ Order.date_time | date: "MMMM d, y"}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="address-box">
+          <b>Address
+            <p style="font-weight: 400;">{{ Order.checkout.address + ' ' + Order.checkout.city + ' ' +
+              Order.checkout.state + '-' + Order.checkout.pincode + ' ' + Order.checkout.country }}</p>
+          </b>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let cartItem of Order.carts; let i = index">
+      <button type="button" class="btn btn-danger mt-3 ms-3" [style]="i==0? 'display: block':'display: none'"
+        (click)="open(Order)" *ngIf=" Order.order_status=='Delivered' && cartItem.return_status==false">Return</button>
+    </div>
+
+    <div class="order-details-box d-flex">
+      <span class="btn btn-danger mt-3 ms-3" (click)="open(Order)" *ngIf="Order.order_status=='New'">Cancel Order</span>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="order-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="orderDetails(Order)">
+        Order Details
+      </button>
+
+      <!-- Modal -->
+     
+    </div>
+
+
+
+    <span class="btn btn-success mt-3 ms-3" *ngIf="Order.order_status=='Cancelled'">Product Already Cancel</span>
+
+    <div class="row pro-ro-5" *ngFor="let cartItem of Order.carts">
+      <span class="mb-3 alert alert-success" *ngIf="cartItem.return_status==true">Product Already Returned</span>
+      <div class="col-lg-4">
+        <div class="img-box">
+          <img src="{{ apiUrl+cartItem.image1 }}" alt="">
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="table-content-box">
+          <b style="display: block;">{{ cartItem.name }}</b>
+  
+          <span style="font-size: 14px;" class="web" [innerHTML]="cartItem.description"></span>
+          <div>
+            <!-- <b>₹{{dealer? cartItem.dealer_price-(cartItem.dealer_discount*cartItem.dealer_price/100):
+              cartItem.customer_price-(cartItem.customer_discount*cartItem.customer_price/100) }}</b> -->
+              <b>{{cartItem.total_amout}}</b>
+
+            <!-- <p class="small-p" *ngIf="dealer? cartItem.dealer_discount: cartItem.customer_discount != 0">₹{{ dealer?
+              cartItem.dealer_price: cartItem.customer_price }}</p> -->
+              <p class="small-p" *ngIf="cartItem.total_discount">{{cartItem.sub_total}}</p>
+          </div>
+          <p style="font-size: 19px;
+                  margin-bottom: 0;">{{ cartItem.qty }} Pcs</p>
+          <p class="green-p">{{ Order.deliver_date? 'Deliverd': 'Not delivered yet' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- order details -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content" *ngIf="productDetails">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Order Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="table-img-box">Image</th>
+                <th scope="col" class="sec-row">Title</th>
+                <th scope="col" class="unit">Unit Cost</th>
+                <th scope="col" class="qty">Qty</th>
+                <th scope="col" class="amt">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cartItem of productDetails.carts">
+                <th scope="row" class="table-img-box">
+                  <img src="{{ apiUrl+cartItem.image1 }}" alt="">
+                </th>
+                <td class="sec-row">{{ cartItem.name }}</td>
+                <td class="unit">₹{{cartItem.total_amout/cartItem.qty}}</td>
+                <td class="qty">{{cartItem.qty}}</td>
+                <td class="amt">₹{{cartItem.total_amout}}</td>
+              </tr>
+          
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row mod-ro">
+          <div class="col-sm-4">
+            <div class="mod-col">
+              <p class="grey-text">Details</p>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Order ID:</p>
+                <p class="text-p">{{productDetails.id}}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Placed on:</p>
+                <p class="text-p">{{productDetails.deliver_date |date}}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Payment mode:</p>
+                <p class="text-p">{{productDetails.payment_type}}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Total items:</p>
+                <!-- display here all quantity of products -->
+                <p class="text-p" *ngIf="totalQty>0">{{totalQty}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="mod-col">
+              <p class="grey-text">Order Summary</p>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">SubTotal: </p>
+                <p class="text-p">₹{{productDetails.subtotal}}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Discount:</p>
+                <p class="text-p" *ngIf="productDetails.discount<=0">₹0</p>
+                <p class="text-p" *ngIf="productDetails.discount>0">₹{{ productDetails.discount}}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Delivery Charges:</p>
+                <p class="text-p"> ₹{{productDetails.delivery_charges}}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-p">Total Amount:</p>
+                <p class="text-p">₹{{productDetails.total}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="mod-col">
+              <p class="grey-text">Billing Address</p>
+              <p class="text-p">
+                {{productDetails.checkout.name}} <br>
+                {{productDetails.checkout.address}},{{productDetails.checkout.city}} <br>
+                {{productDetails.checkout.state}},{{productDetails.checkout.pincode}} <br>
+                {{productDetails.checkout.mobile_number}}
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+

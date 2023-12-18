@@ -1,0 +1,658 @@
+<div>
+  <app-log-in-Sign-up (info)="backDropClicked($event)" *ngIf="LogInModalOpen">
+  </app-log-in-Sign-up>
+</div>
+
+
+<!-- NEW SECTION STARTS -->
+<div class="new-section">
+  <!-- <ngx-skeleton-loader count="10" appearance="line" *ngIf="loader"></ngx-skeleton-loader> -->
+  <!-- <ngx-skeleton-loader animation="progress"></ngx-skeleton-loader> -->
+
+  <img src="../../assets/images/home_images/Vector 1.svg" alt="" fetchpriority="high" class="main-bg-img-1" width="1512"
+    height="5149">
+  <img src="../../assets/images/home_images/Vector 2.svg" alt="" fetchpriority="high" class="main-bg-img-2" width="1512"
+    height="5149">
+  <!-- New First-section starts-->
+
+  <div class="new-first-section">
+    <img fetchpriority="high" src="../../assets/images/home_images/image 40.svg" width="531" height="1056" alt=""
+      class="new-bg-img-1">
+    <div class="container">
+      <div class="text-center" *ngIf="loader">
+        <ngx-skeleton-loader count="1" [theme]="{
+            'height.px': 550,
+            'width.%':90,
+      'background-color': 'rgba(0, 54, 71, 0.6)'
+          }"></ngx-skeleton-loader>
+      </div>
+      <div class="new-first-co-1" *ngIf="!loader">
+        <img fetchpriority="high" src="../../assets/images/home_images/Pattern.webp" width="583" height="354" alt=""
+          class="new-pattern-1">
+        <!-- <div class="new-img-part-1">
+          <img src="../../assets/images/home_images/image 5.png" alt="" id="hidden-new-img-1">
+        </div> -->
+        <div id="carouselExampleControls" class="carousel slide sub-green" data-bs-ride="false">
+          <div class="carousel-inner" *ngIf="sectionOneDetails">
+            <div class="carousel-item {{i==0?'active':''}}"
+              *ngFor="let sectionOneDetails of sectionOneDetails; index as i ">
+              <div class="row new-ro-1">
+                <div class="col-sm-4 d-flex align-items-center">
+                  <div class="new-img-part-1">
+                    <img fetchpriority="high" src="{{apiUrl+sectionOneDetails.image}}" width="277" height="283" alt="">
+
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="new-content-part-1">
+
+                    <h1 class="white-text">{{ sectionOneDetails.title }}
+
+                    </h1>
+                    <p class="white-text-p">
+
+                      {{ sectionOneDetails.description }}
+                    </p>
+                    <!-- <p class="bold-p" style="cursor: pointer;">Discover</p> -->
+                    <button class="white-btn" (click)="redirectProduct()">
+                      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-cart-plus" viewBox="0 0 16 16">
+                        <path
+                          d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                        <path
+                          d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                      </svg> -->
+                      Order Now!
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev" *ngIf="show">
+            <span class="carousel-control-prev-icon new-left" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+              </svg>
+            </span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next" *ngIf="show">
+            <span class="carousel-control-next-icon new-next" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New First-section ends -->
+
+
+  <!-- New Second-section starts -->
+
+  <section class="new-second-section" *ngIf='secondSectionHead'>
+    <img fetchpriority="high" src="../../assets/images/home_images/image 39.svg" width="987" height="1345" alt=""
+      class="new-bg-img-2">
+    <div class="container">
+      <div class="new-second-co-1">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+          <div class="new-prod-container" ngxSlickItem class="slide"
+            *ngFor="let secondSectionItem of secondSectionItems">
+            <div class="row">
+              <div class="col-sm-12 new-prod-slider">
+                <div class="text-center" *ngIf="second">
+                  <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 150,
+                  'width.%':90,
+            'background-color': '#F9F7F6'}"></ngx-skeleton-loader>
+                </div>
+                <div class="new-second-col-1">
+                  <div class="review d-none d-lg-block d-xl-block "
+                    (click)="sendDataToProductList(secondSectionItem.id,secondSectionItem.title)">
+                    <h1 class="second-heading">{{ secondSectionItem.title }}</h1>
+                    <div class="row new-ro-2-1">
+                      <div class="col-sm-6">
+                        <p class="second-subhead">{{secondSectionItem.description }}
+                        </p>
+                      </div>
+                      <div class="col-sm-6">
+                        <!-- <a class="bold-p" style="cursor: pointer;"> Discover Now</a> -->
+                        <img [src]="apiUrl+secondSectionItem.image" alt="" width="238" height="136"
+                          class="second-prod-imgs">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="review d-none d-md-block d-lg-none" (click)="sendDataToProductList(secondSectionItem.id,secondSectionItem.title)">
+                    <h1 class="second-heading">{{ secondSectionItem.title }}</h1>
+                    <div class="row new-ro-2-1">
+                      <div class="col-sm-6">
+                        <p class="second-subhead" id="subhead2">{{secondSectionItem.description}}
+                        </p>
+                      </div>
+                      <div class="col-sm-6">
+                        <!-- <a class="bold-p" style="cursor: pointer;"> Discover Now</a> -->
+                        <img [src]="apiUrl+secondSectionItem.image" alt="" width="238" height="136"
+                          class="second-prod-imgs">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="review d-block d-sm-none" (click)="sendDataToProductList(secondSectionItem.id,secondSectionItem.title)">
+                    <h1 class="second-heading">{{ secondSectionItem.title }}</h1>
+                    <div class="row new-ro-2-1">
+                      <div class="col-sm-6">
+                        <p class="second-subhead" id="subhead3">{{secondSectionItem.description}}
+                        </p>
+                      </div>
+                      <div class="col-sm-6">
+                        <!-- <a class="bold-p" style="cursor: pointer;"> Discover Now</a> -->
+                        <img fetchpriority="high" [src]="apiUrl+secondSectionItem.image" alt="" width="238" height="136"
+                          class="second-prod-imgs" (click)="sendDataToProductList(secondSectionItem.id,secondSectionItem.title)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </ngx-slick-carousel>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Second-section ends -->
+
+
+  <!-- New Third-section starts -->
+
+  <div class="new-third-section" *ngIf="aboutUsDetails">
+    <div class="container">
+      <div class="new-third-co-1">
+        <div class="row new-third-ro-1">
+          <div class="col-sm-6">
+            <div class="new-third-col-1">
+              <div class="text-center" *ngIf="third">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 450,
+                    'width.%':90,
+              'background-color': 'rgba(0, 54, 71, 0.6)'
+                  }"></ngx-skeleton-loader>
+              </div>
+              <img fetchpriority="high" src="../../assets/images/home_images/Group 38585.svg" width="571" height="467"
+                alt="" class="new-bg-img-3">
+              <!-- <img src="../../assets/images/home_images/image 3.png" alt="" class="new-cow-img-1"> -->
+              <img [src]="apiUrl+aboutUsDetails.image" alt="" class="new-cow-img-1" width="371" height="299">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="new-third-col-2">
+              <ngx-skeleton-loader *ngIf="third" count="1" appearance="line" [theme]="{
+                'height.px': 35,
+      'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+              <ngx-skeleton-loader *ngIf="third" count="8" appearance="line" [theme]="{
+                'height.px': 10,
+      'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+              <p class="new-black-text mb-3">{{ aboutUsDetails.title }}</p>
+              <p class="new-text-p">
+                {{ aboutUsDetails.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="justify-content-evenly new-third-ro-2" *ngIf="aboutUsDetails">
+          <div class="new-third-box-1">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 160,
+                  'width.px':240
+                }"></ngx-skeleton-loader>
+            </div>
+            <h1 class="bold-black-text">{{ aboutUsDetails.founded }}</h1>
+            <p class="new-small-p mb-0">Founded</p>
+          </div>
+          <div class="new-third-box-1">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 160,
+                  'width.px':240
+                }"></ngx-skeleton-loader>
+            </div>
+            <!-- <h1>{{ aboutUsDetails.product_sold }}</h1> -->
+            <h1 class="bold-black-text">{{productSoldCounter +'k+'}}</h1>
+            <p class="new-small-p mb-0">Product Sold</p>
+          </div>
+          <div class="new-third-box-1" style="border-right:none;">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 160,
+                  'width.px':240
+                }"></ngx-skeleton-loader>
+            </div>
+            <!-- <h1 style="border-right:none;">{{ aboutUsDetails.best_review }}</h1> -->
+            <h1 class="bold-black-text">{{bestReviewCounter +'k+'}}</h1>
+            <p class="new-small-p mb-0">Best Reviews</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Third-section ends -->
+
+
+  <!-- New Fourth-section starts -->
+
+  <div class="new-fourth-section" *ngIf="becomADealerDetails">
+    <img fetchpriority="high" src="../../assets/images/home_images/Screenshot_2022-12-20_163257-removebg-preview 1.svg"
+      width="835" height="1276" alt="" class="new-bg-img-5">
+    <div class="container">
+      <div class="new-fourth-co-1">
+        <div class="row new-ro-fourth-1">
+          <div class="col-sm-6">
+            <div class="new-fourth-img-part">
+              <div class="text-center" *ngIf="fourth">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 300,
+                    'width.%':90,
+              'background-color': 'rgba(0, 54, 71, 0.6)'
+                  }"></ngx-skeleton-loader>
+              </div>
+              <img fetchpriority="high" src="../../assets/images/home_images/Group 38586.svg" width="636" height="426"
+                alt="" class="new-bg-img-4">
+              <!-- <img src="../../assets/images/home_images/purepng 1.png" alt="" class="new-fourth-img"> -->
+              <img [src]="apiUrl+becomADealerDetails.image" alt="" class="new-fourth-img" width="559" height="492">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="new-fourth-content-part">
+              <ngx-skeleton-loader *ngIf="third" count="1" appearance="line" [theme]="{
+                'height.px': 35,
+      'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+              <ngx-skeleton-loader *ngIf="third" count="4" appearance="line" [theme]="{
+                'height.px': 10,
+      'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+              <h1 class="new-black-text mb-3">{{ becomADealerDetails.title }}</h1>
+              <p class="new-text-p">
+                {{ becomADealerDetails.description }}
+              </p>
+              <button class="bhrt-btn" (click)="goToBecomeADealerPage()">Register Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Fourth-section ends -->
+
+
+  <!-- New Fifth-section starts -->
+
+  <div class="new-fifth-section">
+    <img fetchpriority="high" src="../../assets/images/home_images/image 40.svg" width="531" height="1056" alt=""
+      class="new-bg-img-6">
+    <div class="container">
+      <div class="new-fifth-co-1">
+        <h1 class="new-black-text mb-5">Monthly Deals</h1>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 350,
+                  'width.%':90,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 350,
+                  'width.%':90,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 350,
+                  'width.%':90,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="text-center" *ngIf="third">
+              <ngx-skeleton-loader count="1" [theme]="{
+                  'height.px': 350,
+                  'width.%':90,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
+        <div class="row new-fifth-ro-1">
+          <div class="col-sm-3" *ngFor="let product of products">
+            <div class="new-fifth-col-1">
+              <img fetchpriority="high" src="{{apiUrl+product.image1}}" alt="" class="prod-fifth-img"
+                (click)="sendDataToProductPage(product.id,product.name)" width="235" height="250">
+              <p class="medium-black-text mb-0">{{product.name}}</p>
+              <p class="new-grey-text mb-0" *ngIf="product.discount>0">{{(product.discount)+'%Off'
+                }} </p>
+
+              <p class="new-grey-text mb-0 line" *ngIf="product.discount>0">{{product.price|currency:'INR'}}</p>
+              <p class="medium-black-text mb-0" *ngIf="product.discount>0">{{
+                product.price-product.price/product.discount | currency :'INR'}}</p>
+              <p class="medium-black-text mb-0" *ngIf="product.discount==0">{{ product.price | currency :'INR'}}</p>
+
+              <div class="new-add-to-cart-btn">
+                <button class="bhrt-btn" (click)="addToCart(product)" *ngIf="!ProductsInCart[product.id]">Add to
+                  cart</button>
+
+                <!-- for checking cart -->
+                <!-- <button class="bhrt-btn" (click)="addToCart(product)" *ngIf="ProductsInCart[product.id]">remove to cart</button> -->
+
+                <div class="input-group shadow-sm rounded mt-3 inc" *ngIf="ProductsInCart[product.id]">
+                  <div class="input-group-btn">
+                    <button id="down" class="btn btn-default"
+                      (click)="decreaseValue(ProductsInCart[product.id],product)"><span
+                        class="glyphicon glyphicon-minus">-</span></button>
+                  </div>
+
+                  <p class="mb-0" [style]="ProductsInCart[product.id]?.quantity? 'display:block':'display:none'">
+                    {{ProductsInCart[product.id]?.quantity}}</p>
+                  <div class="input-group-btn">
+                    <button id="up" class="btn btn-default" (click)="increaseValue(ProductsInCart[product.id])"><span
+                        class="glyphicon glyphicon-plus">+</span></button>
+                  </div>
+                </div>
+                <!-- end -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- New Fifth-section ends -->
+
+  <!-- New Sixth-section ends -->
+
+  <div class="new-sixth-section">
+    <div class="container">
+      <div class="new-six-co-1">
+        <div id="carouselExampleControls2" class="carousel slide" data-bs-ride="false">
+          <div class="carousel-inner">
+            <div class="carousel-item {{i==0?'active':''}}" *ngFor="let slide of slideShowSides; index as i">
+              <div class="row new-six-ro-1">
+                <div class="col-sm-6">
+                  <div class="new-six-col-img-part">
+                    <div class="new-bg-img-11"></div>
+                    <div class="text-center" *ngIf="six">
+                      <ngx-skeleton-loader count="1" [theme]="{
+                          'height.px': 250,
+                          'width.%':90,
+                    'background-color': 'rgba(0, 54, 71, 0.6)'
+                        }"></ngx-skeleton-loader>
+                    </div>
+                    <iframe class="six-yt" title="youtube-link" [src]="slide.video_link | safe" alt=""
+                      allowfullscreen></iframe>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="new-six-col-content-part">
+                    <ngx-skeleton-loader *ngIf="six" count="1" appearance="line" [theme]="{
+                      'height.px': 35,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader *ngIf="six" count="4" appearance="line" [theme]="{
+                      'height.px': 10,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+                    <h1 class="new-black-text mb-3">{{ slide.title }}</h1>
+                    <p class="new-text-p mb-3">
+                      {{ slide.short_description | slice:0:400 }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+              </svg>
+            </span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+              </svg>
+            </span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Sixth-section ends -->
+
+
+  <!-- New Seventh-section ends -->
+
+  <div class="new-seventh-section" *ngIf="offerSectionDetails">
+    <img fetchpriority="high" src="../../assets/images/home_images/image 45.svg" width="607" height="1061" alt=""
+      class="new-bg-img-8">
+    <div class="container">
+      <div class="new-seventh-co-1">
+        <div class="row new-seventh-ro-1">
+          <div class="col-sm-6">
+            <div class="new-seventh-content-part">
+              <ngx-skeleton-loader *ngIf="seven" count="1" appearance="line" [theme]="{
+                'height.px': 35,
+      'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+              <ngx-skeleton-loader *ngIf="seven" count="8" appearance="line" [theme]="{
+                'height.px': 10,
+      'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+              <!-- Mats Upto <span style="color: #CC0000;">25%</span> Off -->
+              <h1 class="new-black-text mb-3">
+                {{offerSectionDetails.title | slice :0:9}} <span style="color: #CC0000;">{{offerSectionDetails.title |
+                  slice :10:14}}</span> {{offerSectionDetails.title | slice :14:18}}</h1>
+              <p class="new-text-p">
+                {{offerSectionDetails.description}}
+              </p>
+              <button class="bhrt-btn" (click)="redirectProduct()">SHOP NOW</button>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="new-seventh-img-part">
+              <div class="text-center" *ngIf="seven">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 450,
+                    'width.%':90,
+              'background-color': 'rgba(0, 54, 71, 0.6)'
+                  }"></ngx-skeleton-loader>
+              </div>
+              <img fetchpriority="high" src="../../assets/images/home_images/Group 38587.svg" width="636" height="486"
+                alt="" class="new-bg-img-7">
+              <img [src]="apiUrl+offerSectionDetails.image" alt="" class="new-seventh-img" width="318" height="255">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Seventh-section ends -->
+
+  <!-- New Eight-section starts -->
+
+  <div class="new-eight-section">
+    <img fetchpriority="high" src="../../assets/images/home_images/image 42.svg" width="607" height="961" alt=""
+      class="new-bg-img-12">
+    <div class="container">
+      <div class="new-eight-co-1">
+        <div class="d-flex justify-content-center">
+          <h1 class="new-black-text mb-3">Testimonials</h1>
+        </div>
+        <div id="carouselExampleControls1" class="carousel slide " data-bs-ride="false">
+          <div class="carousel-inner">
+            <div class="carousel-item {{i==0?'active':''}}" *ngFor="let review of reviews index as i">
+              <div class="row new-eight-ro-1">
+                <div class="col-sm-6">
+                  <div class="new-eight-col-img-part">
+                    <div class="text-center" *ngIf="eighth">
+                      <ngx-skeleton-loader count="1" [theme]="{
+                          'height.px': 250,
+                          'width.%':55,
+                    'background-color': 'rgba(0, 54, 71, 0.6)'
+                        }"></ngx-skeleton-loader>
+                    </div>
+                    <img fetchpriority="high" src="../../assets/images/home_images/Group 38588.svg" width="508"
+                      height="417" alt="" class="new-bg-img-9">
+                    <img [src]="apiUrl+review.image" alt="" class="testimonial-img-new" width="400" height="300">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <h1 class="new-black-text mb-3" style="visibility:hidden;">Testimonials</h1>
+                  <div class="new-eight-col-content-part">
+                    <ngx-skeleton-loader *ngIf="eighth" count="1" appearance="line" [theme]="{
+                      'height.px': 35,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+                    <ngx-skeleton-loader *ngIf="eighth" count="4" appearance="line" [theme]="{
+                      'height.px': 10,
+            'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+                    <b class="new-text-p mb-3 d-block">
+                      {{ review?.description | slice:0:300 }}
+                    </b>
+                    <p class="medium-black-text mb-0"> {{ review.name }}</p>
+                    <p class="new-grey-text mb-0">{{review.designation}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+              </svg>
+            </span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+              </svg>
+            </span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Eight-section ends -->
+
+  <!-- New Nine-section starts -->
+  <div class="tenth-section">
+    <div class="container">
+      <div class="ten-co">
+        <div class="row ten-ro">
+          <h1 class="new-black-text">Contact Us</h1>
+          <div class="col-sm-6">
+            <!-- <ngx-skeleton-loader *ngIf="nine" count="1" appearance="line" [theme]="{
+              'height.px': 35,
+    'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader>
+            <ngx-skeleton-loader  *ngIf="nine" count="6" appearance="line" [theme]="{
+              'height.px': 30,
+    'background-color': 'rgb(39 38 38 / 10%)'}"></ngx-skeleton-loader> -->
+            <form [formGroup]="contactForm" class="ten-form-part">
+              <div class="mb-3">
+                <input type="text" class="form-control formInput" formControlName="name" placeholder="Name">
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control formInput" formControlName="email"
+                  placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control formInput" formControlName="phone_number"
+                  placeholder="Phone Number" maxlength="10" minlength="10">
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control formInputTextArea" formControlName="message" rows="3"
+                  placeholder="Messege"></textarea>
+              </div>
+              <div class="captcha-part mb-3">
+                <re-captcha #captcha (resolved)="resolved($event)" [siteKey]="siteKey">
+                </re-captcha>
+              </div>
+
+              <div *ngIf="errorMessage" class="mb-3 text-center alert alert-danger"
+                style="margin: auto; padding: 10px 0px;">
+                <p style="font-family: Arial, Helvetica, sans-serif; font-size: larger; margin: 0;">{{ errorMessage }}
+                </p>
+              </div>
+
+              <!-- <div *ngIf="successMessage && !errorMessage" class="mb-3 text-center alert alert-success"
+                style="margin: auto; padding: 10px 0px;">
+                <p style="font-family: Arial, Helvetica, sans-serif; font-size: larger; margin: 0;">{{ successMessage }}
+                </p>
+              </div> -->
+
+              <div class="mb-3" style="text-align: center;">
+                <button (click)="contactFormSend()" class="bhrt-btn">Send Message</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-6">
+            <div class="ten-map-part">
+              <!-- <div class="text-center"  *ngIf="nine">
+                <ngx-skeleton-loader count="1" [theme]="{
+                    'height.px': 450,
+                    'width.%':90,
+              'background-color': 'rgba(0, 54, 71, 0.6)'
+                  }"></ngx-skeleton-loader>
+              </div> -->
+              <!-- <img fetchpriority="high" src="../../assets/images/home_images/Group-38589.webp" width="571" height="507"
+                alt="" class="new-bg-img-10"> -->
+              <iframe [src]="addrssLink| safe " width="600" height="450" style="border:0;" allowfullscreen=""
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" *ngIf="map"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Nine-section ends -->
+
+</div>
+<!-- NEW SECTION ENDS -->

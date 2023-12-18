@@ -1,0 +1,178 @@
+.dealers {
+    padding: 50px 0 80px 0;
+}
+
+.dealers-ro {
+    align-items: center;
+}
+
+.dealers-ro .col-sm-4 {
+    text-align: right;
+}
+
+.dealers-ro-2 .d-flex {
+    text-align: left;
+}
+
+.dealers-main-box {
+    background: rgba(0, 54, 71, 0.6);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 15px 11px;
+}
+
+.dealer-logo {
+    width: 10%;
+    height: 40px;
+    object-fit: contain;
+}
+
+.dealers-box {
+    background: #285463;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    color: #fff;
+    height: 150px;
+    /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.dealers-box svg {
+    width: 40px;
+}
+
+.dealers-box .text-p {
+    color: #fff;
+    width: 100%;
+}
+
+.text-p {
+    font-size: 19px;
+}
+
+.select-tags{
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-div{
+    width: 100%;
+}
+
+.select-tags select {
+    border-bottom: 1px solid #606060;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    width: 25%;
+    color: #606060;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.dealers-ro-3{
+    position: relative;
+}
+
+.address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    margin-bottom: 0;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width:1280px) {
+    .dealers-box .text-p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width:1024px) {
+    .dealers-box .text-p {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .dealers-box svg {
+        width: 30px;
+    }
+
+}
+
+@media (max-width:992px) {
+    .dealers-box .text-p {
+        font-size: 13px;
+    }
+
+    .address {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        margin-bottom: 0;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@media (max-width:765px) {
+    .dealers-ro-2 .d-flex {
+        justify-content: center;
+    }
+
+    .select-tags{
+        display: block;
+    }
+
+    .btn-div{
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .address {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        margin-bottom: 0;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .dealers-main-box {
+        margin-bottom: 20px;
+        padding: 20px 15px;
+    }
+
+    .select-tags select {
+        width: 45%;
+        margin-right: 10px;
+    }
+
+    .dealers-ro .col-sm-4 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .dealer-logo {
+        width: 15%;
+        height: 30px;
+    }
+
+    .dealers-box {
+        height: 120px;
+    }
+
+    .dealers-box svg {
+        width: 26px;
+        height: 13px;
+    }
+
+    .dealers {
+        padding-bottom: 50px;
+    }
+}

@@ -1,0 +1,15 @@
+<div data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+  <div class="container" style="background-color: #f7f7f7;">
+    <div class="row" style="padding-top:80px;padding-bottom:100px;" *ngFor="let carrers of careers">
+      <div class="d-flex mt-3 justify-content-center">
+        <h1 class="new-black-text" style="text-align:center;">{{ carrers?.title }}</h1>
+      </div>
+
+      <div class="col-sm-11" style="margin: auto;">
+        <div [innerHTML]="carrers?.content">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

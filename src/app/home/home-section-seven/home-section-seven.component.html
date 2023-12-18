@@ -1,0 +1,64 @@
+<!-- <div id="home-4">
+  <div class="home-4 container">
+    <h1 class="text-h1">How Our Products Work</h1>
+    <span class="chevron-icon left" (click)="rotate(0, 'desktop')">
+      <i class="fa fa-chevron-left"></i>
+    </span>
+    <div class="images-container images-desktop-container" style="margin: auto;"
+      (touchstart)="swiped($event, 'start', 'desktop')" (touchend)="swiped($event, 'end', 'desktop')">
+      <div class="img-{{i}}" *ngFor="let slide of slideShowSides; let i = index">
+        <iframe [src]="slide.video_link | safe" alt=""></iframe>
+        <p class="sliderTitle">
+          {{ slide.title }}
+        </p>
+        <div class="sliderDesc">
+          {{ slide.short_description | shortenLength: 60}}
+        </div>
+      </div>
+    </div>
+    <span class="chevron-icon right" (click)="rotate(1, 'desktop')">
+      <i class="fa fa-chevron-right"></i>
+    </span>
+  </div>
+</div> -->
+
+<!-- <div class="container ">
+    <div class="row">
+      <div class="contain">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+
+        <div class="" *ngFor="let slide of slideShowSides; let i = index" ngxSlickItem class="slide"
+          style="text-align: center;">
+          <iframe class="slide-img" [src]="slide.video_link | safe" alt="" style="text-align: center;"></iframe>
+          <p class="sliderTitle">
+            {{ slide.title }}
+          </p>
+          <div class="sliderDesc">
+            {{ slide.short_description | shortenLength: 60}}
+          </div>
+        </div>
+      </ngx-slick-carousel>
+      </div>
+    </div>
+  </div>  -->
+
+<div class="container mb-5">
+  <h1 class="text-h1">How To Test Our Products</h1>
+  <!-- <owl-carousel-o [options]="customOptions">
+    <ng-container *ngFor="let slide of slideShowSides">
+      <ng-template carouselSlide [id:any]="slide.id">
+        <div class="container">
+          <div class="slider">
+            <div class="slider-card">
+              <div class="d-flex justify-content-center align-item-center">
+                <iframe class="" [src]="slide.video_link | safe" alt="" allowfullscreen></iframe>
+              </div>
+              <h5 class="slideTitle"> {{ slide.title }}</h5>
+              <p class="slideSubTitle">{{ slide.short_description | shortenLength: 100}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o> -->
+</div>

@@ -1,0 +1,21 @@
+<div class="faq-section">
+  <div class="container faq-co">
+    <div class="row faq-ro">
+      <div class="d-flex mt-3 justify-content-center">
+        <h1 class="new-black-text">FAQ’s</h1>
+      </div>
+      <div class="container-fluid">
+        <div class="accordion" *ngFor="let faq of faqs; let i = index">
+          <div class="card">
+            <div class="card-header" (click)="toggeler(description)">
+              {{ faq.title }}
+            </div>
+            <div #description class="content-body">
+              {{ faq.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

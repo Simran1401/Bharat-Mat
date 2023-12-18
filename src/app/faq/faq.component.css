@@ -1,0 +1,83 @@
+.text-h1 {
+  font-family: "Frank Ruhl Libre", serif;
+  font-weight: 700;
+  font-size: 54px;
+  margin-bottom: 30px;
+  color: #34251F;
+  text-align: center;
+  display: inline;
+}
+
+.card-header {
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.new-black-text::after{
+  width: 50px;
+}
+
+@media (max-width: 760px) {
+  .text-h1 {
+    font-size: 40px;
+  }
+}
+
+.card {
+  font-size: 16px;
+  margin-bottom: 35px;
+
+}
+
+.btn-link {
+  color: #000 !important;
+}
+
+.fa {
+  margin-right: 20px;
+}
+
+.faq-ro .container-fluid {
+  margin-bottom: 50px;
+}
+
+.content-body {
+  padding: 25px;
+  background: #f7f7f7;
+  overflow: hidden;
+  padding-left: 70px;
+  height: auto;
+  transition: height 1s;
+}
+
+.accordion {
+  background: #F4F4F4;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+}
+
+@media (max-width:990px) {
+  .content-body {
+    padding-left: 36px !important;
+    font-size: 15px;
+  }
+
+  .btn-link {
+    text-align: left !important;
+    display: flex !important;
+  }
+
+  .fa {
+    margin-right: 0;
+    margin-top: 6px;
+  }
+
+  .btn-link span {
+    margin-left: 10px !important;
+  }
+
+  .card-header {
+    padding: 0;
+  }
+}

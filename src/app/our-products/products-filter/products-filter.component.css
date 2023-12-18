@@ -1,0 +1,150 @@
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 10px;
+}
+/* hiding input */
+.container input {
+  position: absolute;
+  opacity: 0;
+  top: 8px;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+/* custom input */
+.checkmark {
+  position: absolute;
+  border-radius: 3px;
+  top: 8px;
+  left: 0;
+  height: 12px;
+  width: 12px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: black;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.rangeSelected {
+  font-weight:400;
+  padding: 0;
+}
+
+.bhrt-btn:active {
+  background-color: rgb(0, 0, 0);
+}
+
+.price-flex{
+  display: flex;
+}
+
+.left-block{
+  padding-right: 50px;
+}
+
+
+/* for the sliders */
+.slider{
+  height: 2px;
+  position: relative;
+  background: rgb(194, 194, 194);
+  border-radius: 5px;
+}
+.slider .progress{
+  height: 100%;
+  left: 25%;
+  display: flex;
+  right: 25%;
+  /* align-items: center; */
+  position: absolute;
+  background: #000000;
+}
+.range-input{
+  position: relative;
+}
+.range-input input{
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: -4px;
+  left: -1px;
+  background: none;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #000000;
+  pointer-events: auto;
+  appearance: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+input[type="range"]::-moz-range-thumb{
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #000000;
+  pointer-events: auto;
+  appearance: none;
+  box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+@media (max-width:1024px) {
+  .left-block{
+    padding-right: 0;
+  }
+
+  .heading{
+    font-size: 19px;
+  }
+}
+
+@media (max-width:992px) {
+  .price-flex{
+    display: block;
+  }
+}

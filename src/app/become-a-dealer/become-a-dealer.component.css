@@ -1,0 +1,99 @@
+.heading {
+
+  font-size: 48px;
+  color: #34251f;
+  font-weight: 700;
+}
+label {
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 35px;
+}
+
+label + input,
+.inputFileUpload {
+  /* height: 50px; */
+  background-color: #fcfcfc;
+}
+
+.select-tag{
+  display: block;
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #ced4da;
+  height: 40px;
+}
+
+.select-divs{
+  height: 40px;
+}
+.location-link {
+  text-decoration: none;
+  color: #2b2a2a;
+  font-size: 18px;
+  font-weight: 600;
+}
+.button {
+  background-color: #34251f;
+  font-weight: 500;
+  font-size: 18px;
+  color: white;
+  height: 63px;
+  width: 180px;
+  border: none;
+  border-radius: 2px;
+  padding: 13px;
+}
+.button:hover {
+  opacity: 0.8;
+}
+.button:active {
+  background-color: rgb(0, 0, 0);
+}
+
+/* .fileUploadSpace {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+} */
+
+input.ng-invalid.ng-touched {
+  border: 1px solid rgb(255, 70, 70);
+}
+
+input[type="file"].ng-valid {
+  /* position: absolute; */
+  border: 1px solid rgb(6, 177, 0);
+}
+
+
+
+
+/* Otp Modal */
+.modal-body{
+  text-align: left;
+}
+
+.modal-content .btn-close{
+  position: absolute;
+  left: 100%;
+  top: 0;
+  transform: translate(-140%,25%);
+}
+
+.modal-content{
+  padding: 20px 30px;
+}
+
